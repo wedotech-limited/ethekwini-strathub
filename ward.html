@@ -29,10 +29,65 @@
         height: 100%;
         width: 100%;
         font-family: "IBM Plex Sans", sans-serif;
+        background-color: transparent;
       }
 
       iframe {
         user-select: none;
+      }
+
+      /* Loading indicator */
+      .lds-ripple {
+        display: inline-block;
+        position: relative;
+        width: 160px;
+        height: 160px;
+      }
+      .lds-ripple div {
+        position: absolute;
+        border: 8px solid #bbb;
+        opacity: 1;
+        border-radius: 50%;
+        animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+      }
+      .lds-ripple div:nth-child(2) {
+        animation-delay: -0.5s;
+      }
+      @keyframes lds-ripple {
+        0% {
+          top: 72px;
+          left: 72px;
+          width: 0;
+          height: 0;
+          opacity: 0;
+        }
+        4.9% {
+          top: 72px;
+          left: 72px;
+          width: 0;
+          height: 0;
+          opacity: 0;
+        }
+        5% {
+          top: 72px;
+          left: 72px;
+          width: 0;
+          height: 0;
+          opacity: 1;
+        }
+        100% {
+          top: 0px;
+          left: 0px;
+          width: 144px;
+          height: 144px;
+          opacity: 0;
+        }
+      }
+
+      .loading-indicator {
+        position: absolute;
+        left: 50%;
+        top: 50%;
       }
 
       /* esri components customization */
@@ -66,6 +121,28 @@
         flex-direction: row;
         height: 100%;
         width: 100%;
+        background-color: #ffffff;
+        border: 1px solid transparent;
+        border-radius: 30px;
+        padding: 20px;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+      }
+
+      .col {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+      }
+
+      .col.section {
+        margin: 5px 10px;
       }
 
       .view-container {
@@ -79,8 +156,47 @@
       }
 
       .ward-details {
-        width: 600px;
+        width: 50%;
         height: 100%;
+        padding: 10px 30px;
+        position: relative;
+      }
+
+      .ward-councillor-image {
+        border: 4px solid transparent;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 300px;
+        height: 210px;
+        position: relative;
+        border-top-width: 2px;
+        border-bottom-width: 2px;
+        border-top-color: rgb(19, 115, 218);
+        border-left-color: rgb(19, 115, 218);
+        border-right-color: rgb(254, 205, 0);
+        border-bottom-color: rgb(254, 205, 0);
+      }
+
+      .ward-councillor-image img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .ward-councillor-right {
+        margin-left: 40px;
+      }
+
+      .ward-councillor-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: rgb(254, 205, 0);
+      }
+
+      .ward-councillor-value {
+        font-size: 32px;
+        line-height: 32px;
+        font-weight: 400;
+        color: rgb(88, 88, 88);
       }
 
       .ward-details-info {
@@ -92,6 +208,49 @@
         text-align: center;
         color: #000;
         opacity: 0.5;
+      }
+
+      .ward-number-title {
+        font-size: 74px;
+        font-weight: 400;
+        color: rgb(19, 115, 218);
+      }
+
+      .ward-number-value {
+        font-size: 74px;
+        font-weight: 400;
+        color: rgb(19, 115, 218);
+        margin-left: 10px;
+        text-decoration: underline;
+      }
+
+      .ward-section-header {
+        color: rgb(19, 115, 218);
+        font-weight: 600;
+        font-size: 28px;
+        margin: 10px 0;
+      }
+
+      .ward-section-info {
+        font-size: 20px;
+        font-weight: 600;
+        color: rgb(85, 85, 85);
+        margin: 5px 0;
+      }
+
+      .ward-population-container {
+        margin: 5px 0;
+      }
+
+      .ward-population-title {
+        font-weight: 400;
+        font-size: 16px;
+        margin: 2px 0;
+      }
+
+      .ward-population-value {
+        font-weight: 600;
+        font-size: 20px;
       }
     </style>
 
@@ -165,12 +324,14 @@
                   result && result.graphic.attributes["OBJECTID"];
 
                 if (!newObjectId) {
-                  highlight && highlight.remove();
-                  objectId = feature.graphic = null;
-                } else if (objectId !== newObjectId) {
+                  return;
+                }
+
+                if (objectId !== newObjectId) {
                   highlight && highlight.remove();
                   objectId = newObjectId;
                   highlight = layerView.highlight(result.graphic);
+                  loadCouncillorDetails(newObjectId);
                 }
               });
             });
@@ -185,6 +346,69 @@
           });
         });
       });
+
+      function formatNumberValue(value) {
+        if (!value && value != 0) {
+          return "N/A";
+        }
+
+        return value;
+      }
+
+      function loadCouncillorDetails(id) {
+        var url =
+          "https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/KnowYourCouncillor/FeatureServer/0/query?f=json&objectIds=" +
+          id +
+          "&outFields=Black_African%2CColoured%2CFirst_Name%2CImageLink%2CIndian_or_Asian%2CSurname%2CWardNo%2CWhite%2COBJECTID&outSR=102100&returnGeometry=false&spatialRel=esriSpatialRelIntersects";
+        var infoEl = document.getElementById("wardDetailsInfo");
+        var loadingIndicatorEl = document.getElementById("loadingIndicator");
+        var wardDetailsEl = document.getElementById("wardDetails");
+
+        infoEl.classList.add("display-none");
+        loadingIndicatorEl.classList.remove("display-none");
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            try {
+              var data = JSON.parse(this.responseText);
+              var attributes = data.features[0].attributes;
+              document.getElementById("wardNumberValue").textContent =
+                attributes.WardNo;
+
+              var firstName = attributes.First_Name;
+              var surname = attributes.Surname;
+              if (!firstName || firstName == "null") {
+                firstName = "N/A";
+              }
+
+              if (!surname || surname == "null") {
+                surname = "";
+              }
+
+              document.getElementById("wardCouncillorValue").textContent =
+                firstName + " " + surname;
+              document.getElementById("wardCouncillorImg").src =
+                attributes.ImageLink;
+              document.getElementById("wardAfricanValue").textContent =
+                formatNumberValue(attributes.Black_African);
+              document.getElementById("wardIndianValue").textContent =
+                formatNumberValue(attributes.Indian_or_Asian);
+              document.getElementById("wardColouredValue").textContent =
+                formatNumberValue(attributes.Coloured);
+              document.getElementById("wardWhiteValue").textContent =
+                formatNumberValue(attributes.White);
+
+              loadingIndicatorEl.classList.add("display-none");
+              wardDetailsEl.classList.remove("display-none");
+            } catch (error) {
+              console.error("Error retrieving councillor details", error);
+            }
+          }
+        };
+        xhttp.open("GET", url);
+        xhttp.send();
+      }
     </script>
   </head>
 
@@ -194,6 +418,102 @@
       <div class="ward-details">
         <div id="wardDetailsInfo" class="ward-details-info">
           Click on a ward to view relevant information
+        </div>
+        <div id="loadingIndicator" class="loading-indicator display-none">
+          <div class="lds-ripple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div id="wardDetails" class="ward-details-data display-none">
+          <div class="row">
+            <div class="ward-councillor-image">
+              <div class="ward-councillor-image-ring-1"></div>
+              <div class="ward-councillor-image-ring-2"></div>
+              <img id="wardCouncillorImg" src="" alt="Ward Councillor" />
+            </div>
+            <div class="col ward-councillor-right">
+              <div class="row">
+                <div class="ward-number-container">
+                  <span class="ward-number-title">Ward</span
+                  ><span id="wardNumberValue" class="ward-number-value"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="ward-councillor-container">
+                  <div class="ward-councillor-title">Councillor</div>
+                  <div
+                    id="wardCouncillorValue"
+                    class="ward-councillor-value"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col section">
+              <div class="ward-section-header">Population</div>
+              <div class="ward-section-info">
+                This ward has <span id="wardPopulation"></span>% of the total
+                city population, of which
+              </div>
+              <div class="ward-population-container">
+                <div id="wardAfricanValue" class="ward-population-value">
+                  15936
+                </div>
+                <div class="ward-population-title">are African</div>
+              </div>
+              <div class="ward-population-container">
+                <div id="wardIndianValue" class="ward-population-value">
+                  9898
+                </div>
+                <div class="ward-population-title">are Indian / Asian</div>
+              </div>
+              <div class="ward-population-container">
+                <div id="wardWhiteValue" class="ward-population-value">
+                  7891
+                </div>
+                <div class="ward-population-title">are White</div>
+              </div>
+              <div class="ward-population-container">
+                <div id="wardColouredValue" class="ward-population-value">
+                  936
+                </div>
+                <div class="ward-population-title">are Coloured</div>
+              </div>
+            </div>
+            <div class="col section">
+              <div class="row">
+                <div class="col">
+                  <div class="ward-section-header">Budgets</div>
+                  <div class="ward-section-info">
+                    This ward is allocated <span id="wardBudgetsValue"></span>%
+                    of the total budgets
+                  </div>
+                  <div class="ward-budget-title-container">
+                    <span class="ward-budget-title">Value of R</span
+                    ><span
+                      id="wardBudgetValue"
+                      class="ward-budget-value"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="ward-section-header">Projects ></div>
+                  <div class="ward-section-info">
+                    This ward is allocated <span id="wardProjectsValue"></span>%
+                    of the total budgets
+                  </div>
+                  <div class="ward-project-title-container">
+                    <span class="ward-project-title">Value of R</span
+                    ><span
+                      id="wardProjectValue"
+                      class="ward-project-value"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

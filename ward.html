@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <title>WeDoTech - eThekwini Ward Profile</title>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.24/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.24/"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet" />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        font-family: "IBM Plex Sans", sans-serif;
+      }
+
+      iframe {
+        user-select: none;
+      }
+
+      /* esri components customization */
+      .esri-ui-corner .esri-component {
+        width: 50px;
+        height: 100px;
+        border: 3px solid blue;
+        border-radius: 10px;
+        margin-left: 0;
+        padding: 1px;
+        background: #f3f3f3;
+      }
+
+      .esri-zoom .esri-widget--button {
+        width: 42px;
+        height: 50px;
+        background-color: transparent;
+      }
+
+      .esri-view .esri-view-surface--inset-outline:focus::after {
+        outline: none;
+      }
+
+      /* local styles */
+      .display-none {
+        display: none !important;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+      }
+
+      .view-container {
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+        border-radius: 30px;
+        border: 1px solid transparent;
+        margin: 10px 0 10px 10px;
+        overflow: hidden;
+      }
+
+      .ward-details {
+        width: 600px;
+        height: 100%;
+      }
+
+      .ward-details-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 24px;
+        text-align: center;
+        color: #000;
+        opacity: 0.5;
+      }
+    </style>
+
+    <script>
+      require([
+        "esri/WebMap",
+        "esri/layers/FeatureLayer",
+        "esri/views/MapView",
+        "esri/widgets/Feature",
+        "esri/core/promiseUtils",
+      ], (WebMap, FeatureLayer, MapView, Feature, promiseUtils) => {
+        const fLayer = new FeatureLayer({
+          portalItem: {
+            id: "675366b4b0fe4b68aa4302f1453889c7",
+          },
+          layerId: 0,
+          outFields: ["*"],
+        });
+
+        const map = new WebMap({
+          portalItem: {
+            id: "7252ef2a4ecb4465824e373f2a0a136d",
+          },
+          layers: [fLayer],
+        });
+
+        const view = new MapView({
+          container: "viewContainer",
+          map: map,
+          center: [30.95295, -29.8536228],
+          zoom: 9,
+          navigation: {
+            mouseWheelZoomEnabled: false,
+          },
+          highlightOptions: {
+            color: [19, 115, 218],
+            haloOpacity: 1,
+            fillOpacity: 0.85,
+          },
+          popup: {
+            autoOpenEnabled: false,
+          },
+        });
+
+        view.ui.move(["zoom"], "bottom-right");
+
+        view.when().then(() => {
+          // Create a default graphic for when the application starts
+          const graphic = {};
+
+          const feature = new Feature({
+            graphic: graphic,
+            map: view.map,
+            spatialReference: view.spatialReference,
+          });
+
+          view.whenLayerView(fLayer).then((layerView) => {
+            let highlight;
+            let objectId;
+
+            const debouncedUpdate = promiseUtils.debounce((event) => {
+              // Perform a hitTest on the View
+              view.hitTest(event).then((event) => {
+                // Make sure graphic has a popupTemplate
+                const results = event.results.filter((result) => {
+                  return result.graphic.layer.popupTemplate;
+                });
+
+                const result = results[0];
+                const newObjectId =
+                  result && result.graphic.attributes["OBJECTID"];
+
+                if (!newObjectId) {
+                  highlight && highlight.remove();
+                  objectId = feature.graphic = null;
+                } else if (objectId !== newObjectId) {
+                  highlight && highlight.remove();
+                  objectId = newObjectId;
+                  highlight = layerView.highlight(result.graphic);
+                }
+              });
+            });
+
+            view.on("click", (event) => {
+              debouncedUpdate(event).catch((err) => {
+                if (!promiseUtils.isAbortError(err)) {
+                  throw err;
+                }
+              });
+            });
+          });
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="card">
+      <div id="viewContainer" class="view-container"></div>
+      <div class="ward-details">
+        <div id="wardDetailsInfo" class="ward-details-info">
+          Click on a ward to view relevant information
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
-    <title>WeDoTech - eThekwini Livability</title>
+    <title>WeDoTech - eThekwini Liveability</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet" />
     <link rel="stylesheet" href="base.css" />
-    <link rel="stylesheet" href="livability.css" />
+    <link rel="stylesheet" href="liveability.css" />
 
     <script>
       document.documentElement.className += window.self == window.top ? " top" : " framed";
@@ -23,6 +23,7 @@
         <div class="suburb-input-container">
           <input id="suburbInput" class="suburb-input" type="text" />
           <ul id="suburbList" class="suburb-list"></ul>
+          <div class="suburb-hint">Choose suburb above</div>
         </div>
       </div>
       <div class="title">Category Scores</div>
@@ -37,7 +38,7 @@
             <div class="chart-scale">
               <div class="chart-scale-0">0</div>
               <div class="chart-scale-50">
-                <div>National Average</div>
+                <div class="chart-scale-avg-text">National Average</div>
                 <div>50</div>
               </div>
               <div class="chart-scale-100">100</div>
@@ -61,6 +62,9 @@
                 <div id="housingBar" class="chart-indicator-bar-fill yellow">
                   <div id="housingValue" class="chart-indicator-value"></div>
                 </div>
+                <div id="housingMedianBar" class="chart-indicator-median-bar-fill">
+                  <div id="housingMedianValue" class="chart-indicator-median-value"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -81,46 +85,10 @@
             </div>
           </div>
           <div class="col-12 col-12-sm chart-metric-table-col">
-            <table id="housingMetricsTable" class="chart-metric-table hidden">
-              <!-- <thead>
-                <tr>
-                  <th>Housing Metrics</th>
-                  <th>Value</th>
-                  <th>Rank</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Avg. Subsidised Property Valuation</td>
-                  <td class="chart-metric-table-value">33</td>
-                  <td class="chart-metric-table-value">1</td>
-                </tr>
-              </tbody> -->
-            </table>
+            <table id="housingMetricsTable" class="chart-metric-table hidden"></table>
           </div>
           <div class="col-12 col-12-sm chart-policy-table-col">
-            <table id="housingPoliciesTable" class="chart-policy-table hidden">
-              <!-- <thead>
-                <tr>
-                  <th>Housing Policies</th>
-                  <th>URL</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Accommodation Establishment</td>
-                  <td class="chart-policy-table-value">
-                    <a
-                      href="https://openbylaws.org.za/za-eth/act/by-law/1993/accommodation-establishment/eng/"
-                      target="_blank"
-                      >openbylaws.org</a
-                    >
-                  </td>
-                  <td class="chart-policy-table-value">1993/12/17</td>
-                </tr>
-              </tbody> -->
-            </table>
+            <table id="housingPoliciesTable" class="chart-policy-table hidden"></table>
           </div>
         </div>
 
@@ -138,6 +106,9 @@
               <div class="chart-indicator-bar">
                 <div id="neighbourhoodBar" class="chart-indicator-bar-fill green--light">
                   <div id="neighbourhoodValue" class="chart-indicator-value"></div>
+                </div>
+                <div id="neighbourhoodMedianBar" class="chart-indicator-median-bar-fill">
+                  <div id="neighbourhoodMedianValue" class="chart-indicator-median-value"></div>
                 </div>
               </div>
             </div>
@@ -181,6 +152,9 @@
                 <div id="transportationBar" class="chart-indicator-bar-fill green">
                   <div id="transportationValue" class="chart-indicator-value"></div>
                 </div>
+                <div id="transportationMedianBar" class="chart-indicator-median-bar-fill">
+                  <div id="transportationMedianValue" class="chart-indicator-median-value"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -222,6 +196,9 @@
               <div class="chart-indicator-bar">
                 <div id="environmentBar" class="chart-indicator-bar-fill blue">
                   <div id="environmentValue" class="chart-indicator-value"></div>
+                </div>
+                <div id="environmentMedianBar" class="chart-indicator-median-bar-fill">
+                  <div id="environmentMedianValue" class="chart-indicator-median-value"></div>
                 </div>
               </div>
             </div>
@@ -265,6 +242,9 @@
                 <div id="healthBar" class="chart-indicator-bar-fill blue">
                   <div id="healthValue" class="chart-indicator-value"></div>
                 </div>
+                <div id="healthMedianBar" class="chart-indicator-median-bar-fill">
+                  <div id="healthMedianValue" class="chart-indicator-median-value"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -306,6 +286,9 @@
               <div class="chart-indicator-bar">
                 <div id="engagementBar" class="chart-indicator-bar-fill blue--dark">
                   <div id="engagementValue" class="chart-indicator-value"></div>
+                </div>
+                <div id="engagementMedianBar" class="chart-indicator-median-bar-fill">
+                  <div id="engagementMedianValue" class="chart-indicator-median-value"></div>
                 </div>
               </div>
             </div>
@@ -349,6 +332,9 @@
                 <div id="opportunityBar" class="chart-indicator-bar-fill green">
                   <div id="opportunityValue" class="chart-indicator-value"></div>
                 </div>
+                <div id="opportunityMedianBar" class="chart-indicator-median-bar-fill">
+                  <div id="opportunityMedianValue" class="chart-indicator-median-value"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -390,6 +376,9 @@
               <div class="chart-indicator-bar">
                 <div id="educationBar" class="chart-indicator-bar-fill green--light">
                   <div id="educationValue" class="chart-indicator-value"></div>
+                </div>
+                <div id="educationMedianBar" class="chart-indicator-median-bar-fill">
+                  <div id="educationMedianValue" class="chart-indicator-median-value"></div>
                 </div>
               </div>
             </div>
@@ -433,6 +422,9 @@
                 <div id="safetyBar" class="chart-indicator-bar-fill green--light">
                   <div id="safetyValue" class="chart-indicator-value"></div>
                 </div>
+                <div id="safetyMedianBar" class="chart-indicator-median-bar-fill">
+                  <div id="safetyMedianValue" class="chart-indicator-median-value"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -469,9 +461,9 @@
         <div class="col-4 col-12-sm">
           <div class="chart-footer-title">Key Terms</div>
         </div>
-        <div class="col-4 col-12-sm">
+        <!-- <div class="col-4 col-12-sm">
           <div class="chart-footer-title">Customize Your Score</div>
-        </div>
+        </div> -->
       </div>
       <div class="row">
         <div class="col-4 col-12-sm">
@@ -484,21 +476,21 @@
         </div>
         <div class="col-4 col-12-sm">
           <div class="chart-footer-text">
-            Understanding the basic concepts and terms around the AARP Livability Index is one step
-            toward improving livability.
+            Understanding the basic concepts and terms around the Liveability Index is one step
+            toward improving liveability.
           </div>
         </div>
-        <div class="col-4 col-12-sm">
+        <!-- <div class="col-4 col-12-sm">
           <div class="chart-footer-text">
-            Personalize your overall score results based on what livability categories matter most
+            Personalize your overall score results based on what liveability categories matter most
             to you.
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="row">
         <div class="col-4 col-12-sm">
           <div class="chart-footer-link">
-            <a href="#">Learn more about our methodology and the key factors of livability ></a>
+            <a href="#">Learn more about our methodology and the key factors of liveability ></a>
           </div>
         </div>
         <div class="col-4 col-12-sm">
@@ -506,16 +498,16 @@
             <a href="#">Learn more about the key terms we use. ></a>
           </div>
         </div>
-        <div class="col-4 col-12-sm">
+        <!-- <div class="col-4 col-12-sm">
           <div class="chart-footer-link">
             <a href="#">Visit the customization tool ></a>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="container hidden-md">
       <div class="row chart-footer">
-        <div class="col-4 col-12-sm">
+        <div class="col-6 col-12-sm">
           <div class="chart-footer-title">Scoring Essentials</div>
           <div class="chart-footer-text">
             Suprised by the score?
@@ -524,31 +516,31 @@
             Issues surrounding livable communities are complex and interconnected.
           </div>
           <div class="chart-footer-link">
-            <a href="#">Learn more about our methodology and the key factors of livability ></a>
+            <a href="#">Learn more about our methodology and the key factors of liveability ></a>
           </div>
         </div>
-        <div class="col-4 col-12-sm">
+        <div class="col-6 col-12-sm">
           <div class="chart-footer-title">Key Terms</div>
           <div class="chart-footer-text">
-            Understanding the basic concepts and terms around the AARP Livability Index is one step
-            toward improving livability.
+            Understanding the basic concepts and terms around the AARP Liveability Index is one step
+            toward improving liveability.
           </div>
-          <div class="col-4 col-12-sm">
+          <div class="col-6 col-12-sm">
             <div class="chart-footer-link">
               <a href="#">Learn more about the key terms we use. > </a>
             </div>
           </div>
         </div>
-        <div class="col-4 col-12-sm">
+        <!-- <div class="col-4 col-12-sm">
           <div class="chart-footer-title">Customize Your Score</div>
           <div class="chart-footer-text">
-            Personalize your overall score results based on what livability categories matter most
+            Personalize your overall score results based on what liveability categories matter most
             to you.
           </div>
           <div class="chart-footer-link">
             <a href="#">Visit the customization tool ></a>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </body>
@@ -593,7 +585,7 @@
       });
     }
 
-    function getLivabilityCategories(suburb) {
+    function getLiveabilityCategories(suburb) {
       return new Promise((resolve, reject) => {
         const url = `https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/Suburb_Liveability_Index_Categories/FeatureServer/0/query?outFields=*&where=Suburb = '${suburb}'&f=geojson`;
         fetch(url)
@@ -615,7 +607,7 @@
       });
     }
 
-    function getLivabilityIndexValues(suburb) {
+    function getLiveabilityIndexValues(suburb) {
       return new Promise((resolve, reject) => {
         const url = `https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/Suburb_Liveability_Index_Values/FeatureServer/0/query?outFields=*&where=Suburb = '${suburb}'&f=geojson`;
         fetch(url)
@@ -690,6 +682,8 @@
       Object.values(CATEGORY_MAP).forEach((category) => {
         document.getElementById(`${category}Bar`).style.width = "0%";
         document.getElementById(`${category}Value`).textContent = "";
+        document.getElementById(`${category}MedianBar`).style.width = "0%";
+        document.getElementById(`${category}MedianValue`).textContent = "";
       });
     }
 
@@ -699,6 +693,10 @@
       Object.entries(CATEGORY_MAP).forEach(([key, value]) => {
         document.getElementById(`${value}Bar`).style.width = categories[key].index_value + "%";
         document.getElementById(`${value}Value`).textContent = categories[key].index_value;
+        document.getElementById(`${value}MedianBar`).style.width =
+          categories[key].median_index_value + "%";
+        document.getElementById(`${value}MedianValue`).textContent =
+          categories[key].median_index_value;
       });
     }
 
@@ -842,8 +840,8 @@
         });
       }
 
-      getLivabilityCategories(suburb).then((categories) => {
-        getLivabilityIndexValues(suburb).then((indexValues) => {
+      getLiveabilityCategories(suburb).then((categories) => {
+        getLiveabilityIndexValues(suburb).then((indexValues) => {
           createChartMetrics(indexValues);
         });
         updateChart(categories);

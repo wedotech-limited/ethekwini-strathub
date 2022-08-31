@@ -1,0 +1,262 @@
+:root {
+  --eth-blue: rgb(19, 115, 218);
+  --eth-yellow: rgb(254, 205, 0);
+}
+
+.suburb-container {
+  display: flex;
+  align-items: center;
+}
+
+.suburb-title {
+  font-size: 60px;
+  color: var(--eth-blue);
+  font-weight: 500;
+}
+
+.suburb-input-container {
+  position: relative;
+}
+
+.suburb-list {
+  position: absolute;
+  background-color: #fff;
+  list-style: none;
+  width: 100%;
+  max-height: 400px;
+  overflow: auto;
+  z-index: 10;
+  color: var(--eth-blue);
+  font-size: 20px;
+  border: 1px solid var(--eth-blue);
+  margin: 0;
+  margin-left: 30px;
+  padding: 0;
+}
+
+.suburb-list li {
+  cursor: pointer;
+}
+
+.suburb-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.suburb-option:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.suburb-option-district {
+  font-size: 70%;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.suburb-input {
+  border: 0;
+  /* border-bottom: 1px solid var(--eth-blue); */
+  font-size: 48px;
+  color: var(--eth-blue);
+  margin-left: 30px;
+  padding: 0 10px;
+  line-height: 1;
+  outline: none;
+}
+
+.title {
+  font-size: 54px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: var(--eth-blue);
+}
+
+.description {
+  font-size: 20px;
+}
+
+.chart {
+  margin-top: 40px;
+}
+
+.chart-metric-row {
+  margin: 10px 0 30px 0;
+}
+
+.chart-scale {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--eth-blue);
+  padding: 0 5px;
+}
+
+.chart-scale-50 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-category {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.chart-category img {
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+}
+
+.chart-category-image {
+  width: 45px;
+  height: 45px;
+  margin-right: 30px;
+  justify-content: center;
+  text-align: center;
+}
+
+.chart-category-text {
+  font-size: 20px;
+}
+
+.chart-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+}
+
+.chart-option-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.chart-option-item::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 12px;
+  background-image: url(assets/caret.svg);
+  background-repeat: no-repeat;
+  margin-top: 1px;
+  margin-left: 8px;
+}
+
+.chart-indicator-col {
+  order: 3;
+}
+
+.chart-indicator {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+.chart-indicator-bar {
+  width: 100%;
+  height: 19px;
+  background-color: rgb(240, 240, 240);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2) inset;
+}
+
+.chart-indicator-value {
+  width: 100%;
+  position: absolute;
+  text-align: right;
+  top: 18px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.chart-indicator-bar-fill {
+  border-radius: 10px;
+  border: 2px solid #fff;
+  /* border-right-width: 4px; */
+  position: absolute;
+  height: 19px;
+  top: 0;
+}
+
+.chart-indicator-bar-fill.blue {
+  background-color: var(--eth-blue);
+}
+
+.chart-indicator-bar-fill.blue--dark {
+  background-color: rgb(14, 77, 135);
+}
+
+.chart-indicator-bar-fill.yellow {
+  background-color: var(--eth-yellow);
+}
+
+.chart-indicator-bar-fill.green--light {
+  background-color: rgb(127, 178, 6);
+}
+
+.chart-indicator-bar-fill.green {
+  background-color: rgb(0, 150, 12);
+}
+
+.chart-footer {
+  margin-top: 20px;
+}
+
+.chart-footer-title {
+  font-size: 27px;
+  font-weight: 600;
+  color: var(--eth-blue);
+  margin-top: 20px;
+}
+
+.chart-footer-text {
+  font-size: 18px;
+  color: rgb(85, 85, 85);
+}
+
+.chart-footer-link {
+  margin-top: 20px;
+}
+
+.chart-footer-link a {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--eth-blue);
+}
+
+@media (min-width: 768px) {
+  .chart-metric-row {
+    margin: 10px 0 20px;
+  }
+
+  .chart-indicator-col {
+    order: initial;
+  }
+
+  .chart-indicator-bar-fill {
+    top: 13px;
+  }
+
+  .chart-footer {
+    margin-top: 40px;
+  }
+
+  .chart-footer-title {
+    margin-top: 0;
+  }
+}

@@ -2,9 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
     <title>WeDoTech - eThekwini Livability</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,8 +13,7 @@
     <link rel="stylesheet" href="livability.css" />
 
     <script>
-      document.documentElement.className +=
-        window.self == window.top ? " top" : " framed";
+      document.documentElement.className += window.self == window.top ? " top" : " framed";
     </script>
   </head>
   <body>
@@ -30,8 +27,8 @@
       </div>
       <div class="title">Category Scores</div>
       <div class="description">
-        These are the category scores for <span id="currentSuburbText"></span>.
-        Explore the metrics and policies behind the numbers.
+        These are the category scores for <span id="currentSuburbText"></span>. Explore the metrics
+        and policies behind the numbers.
       </div>
       <div class="chart">
         <div class="row">
@@ -69,13 +66,61 @@
           </div>
           <div class="col-3 col-6-sm">
             <div class="chart-options">
-              <div class="chart-option-item">
+              <div
+                id="housingMetricsButton"
+                class="chart-option-item"
+                onclick="toggleMetricsTable('housing')">
                 <div class="text">Metrics</div>
               </div>
-              <div class="chart-option-item">
+              <div
+                id="housingPoliciesButton"
+                class="chart-option-item"
+                onclick="togglePoliciesTable('housing')">
                 <div class="text">Policies</div>
               </div>
             </div>
+          </div>
+          <div class="col-12 col-12-sm chart-metric-table-col">
+            <table id="housingMetricsTable" class="chart-metric-table hidden">
+              <!-- <thead>
+                <tr>
+                  <th>Housing Metrics</th>
+                  <th>Value</th>
+                  <th>Rank</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Avg. Subsidised Property Valuation</td>
+                  <td class="chart-metric-table-value">33</td>
+                  <td class="chart-metric-table-value">1</td>
+                </tr>
+              </tbody> -->
+            </table>
+          </div>
+          <div class="col-12 col-12-sm chart-policy-table-col">
+            <table id="housingPoliciesTable" class="chart-policy-table hidden">
+              <!-- <thead>
+                <tr>
+                  <th>Housing Policies</th>
+                  <th>URL</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Accommodation Establishment</td>
+                  <td class="chart-policy-table-value">
+                    <a
+                      href="https://openbylaws.org.za/za-eth/act/by-law/1993/accommodation-establishment/eng/"
+                      target="_blank"
+                      >openbylaws.org</a
+                    >
+                  </td>
+                  <td class="chart-policy-table-value">1993/12/17</td>
+                </tr>
+              </tbody> -->
+            </table>
           </div>
         </div>
 
@@ -91,25 +136,33 @@
           <div class="col-6 col-12-sm chart-indicator-col">
             <div class="chart-indicator">
               <div class="chart-indicator-bar">
-                <div
-                  id="neighbourhoodBar"
-                  class="chart-indicator-bar-fill green--light">
-                  <div
-                    id="neighbourhoodValue"
-                    class="chart-indicator-value"></div>
+                <div id="neighbourhoodBar" class="chart-indicator-bar-fill green--light">
+                  <div id="neighbourhoodValue" class="chart-indicator-value"></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-3 col-6-sm">
             <div class="chart-options">
-              <div class="chart-option-item">
+              <div
+                id="neighbourhoodMetricsButton"
+                class="chart-option-item"
+                onclick="toggleMetricsTable('neighbourhood')">
                 <div class="text">Metrics</div>
               </div>
-              <div class="chart-option-item">
+              <div
+                id="neighbourhoodPoliciesButton"
+                class="chart-option-item"
+                onclick="togglePoliciesTable('neighbourhood')">
                 <div class="text">Policies</div>
               </div>
             </div>
+          </div>
+          <div class="col-12 col-12-sm chart-metric-table-col">
+            <table id="neighbourhoodMetricsTable" class="chart-metric-table hidden"></table>
+          </div>
+          <div class="col-12 col-12-sm chart-policy-table-col">
+            <table id="neighbourhoodPoliciesTable" class="chart-policy-table hidden"></table>
           </div>
         </div>
 
@@ -125,25 +178,33 @@
           <div class="col-6 col-12-sm chart-indicator-col">
             <div class="chart-indicator">
               <div class="chart-indicator-bar">
-                <div
-                  id="transportationBar"
-                  class="chart-indicator-bar-fill green">
-                  <div
-                    id="transportationValue"
-                    class="chart-indicator-value"></div>
+                <div id="transportationBar" class="chart-indicator-bar-fill green">
+                  <div id="transportationValue" class="chart-indicator-value"></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-3 col-6-sm">
             <div class="chart-options">
-              <div class="chart-option-item">
+              <div
+                id="transportationMetricsButton"
+                class="chart-option-item"
+                onclick="toggleMetricsTable('transportation')">
                 <div class="text">Metrics</div>
               </div>
-              <div class="chart-option-item">
+              <div
+                id="transportationPoliciesButton"
+                class="chart-option-item"
+                onclick="togglePoliciesTable('transportation')">
                 <div class="text">Policies</div>
               </div>
             </div>
+          </div>
+          <div class="col-12 col-12-sm chart-metric-table-col">
+            <table id="transportationMetricsTable" class="chart-metric-table hidden"></table>
+          </div>
+          <div class="col-12 col-12-sm chart-policy-table-col">
+            <table id="transportationPoliciesTable" class="chart-policy-table hidden"></table>
           </div>
         </div>
 
@@ -160,22 +221,32 @@
             <div class="chart-indicator">
               <div class="chart-indicator-bar">
                 <div id="environmentBar" class="chart-indicator-bar-fill blue">
-                  <div
-                    id="environmentValue"
-                    class="chart-indicator-value"></div>
+                  <div id="environmentValue" class="chart-indicator-value"></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-3 col-6-sm">
             <div class="chart-options">
-              <div class="chart-option-item">
+              <div
+                id="environmentMetricsButton"
+                class="chart-option-item"
+                onclick="toggleMetricsTable('environment')">
                 <div class="text">Metrics</div>
               </div>
-              <div class="chart-option-item">
+              <div
+                id="environmentPoliciesButton"
+                class="chart-option-item"
+                onclick="togglePoliciesTable('environment')">
                 <div class="text">Policies</div>
               </div>
             </div>
+          </div>
+          <div class="col-12 col-12-sm chart-metric-table-col">
+            <table id="environmentMetricsTable" class="chart-metric-table hidden"></table>
+          </div>
+          <div class="col-12 col-12-sm chart-policy-table-col">
+            <table id="environmentPoliciesTable" class="chart-policy-table hidden"></table>
           </div>
         </div>
 
@@ -199,13 +270,25 @@
           </div>
           <div class="col-3 col-6-sm">
             <div class="chart-options">
-              <div class="chart-option-item">
+              <div
+                id="healthMetricsButton"
+                class="chart-option-item"
+                onclick="toggleMetricsTable('health')">
                 <div class="text">Metrics</div>
               </div>
-              <div class="chart-option-item">
+              <div
+                id="healthPoliciesButton"
+                class="chart-option-item"
+                onclick="togglePoliciesTable('health')">
                 <div class="text">Policies</div>
               </div>
             </div>
+          </div>
+          <div class="col-12 col-12-sm chart-metric-table-col">
+            <table id="healthMetricsTable" class="chart-metric-table hidden"></table>
+          </div>
+          <div class="col-12 col-12-sm chart-policy-table-col">
+            <table id="healthPoliciesTable" class="chart-policy-table hidden"></table>
           </div>
         </div>
 
@@ -221,9 +304,7 @@
           <div class="col-6 col-12-sm chart-indicator-col">
             <div class="chart-indicator">
               <div class="chart-indicator-bar">
-                <div
-                  id="engagementBar"
-                  class="chart-indicator-bar-fill blue--dark">
+                <div id="engagementBar" class="chart-indicator-bar-fill blue--dark">
                   <div id="engagementValue" class="chart-indicator-value"></div>
                 </div>
               </div>
@@ -231,13 +312,25 @@
           </div>
           <div class="col-3 col-6-sm">
             <div class="chart-options">
-              <div class="chart-option-item">
+              <div
+                id="engagementMetricsButton"
+                class="chart-option-item"
+                onclick="toggleMetricsTable('engagement')">
                 <div class="text">Metrics</div>
               </div>
-              <div class="chart-option-item">
+              <div
+                id="engagementPoliciesButton"
+                class="chart-option-item"
+                onclick="togglePoliciesTable('engagement')">
                 <div class="text">Policies</div>
               </div>
             </div>
+          </div>
+          <div class="col-12 col-12-sm chart-metric-table-col">
+            <table id="engagementMetricsTable" class="chart-metric-table hidden"></table>
+          </div>
+          <div class="col-12 col-12-sm chart-policy-table-col">
+            <table id="engagementPoliciesTable" class="chart-policy-table hidden"></table>
           </div>
         </div>
 
@@ -254,22 +347,116 @@
             <div class="chart-indicator">
               <div class="chart-indicator-bar">
                 <div id="opportunityBar" class="chart-indicator-bar-fill green">
-                  <div
-                    id="opportunityValue"
-                    class="chart-indicator-value"></div>
+                  <div id="opportunityValue" class="chart-indicator-value"></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-3 col-6-sm">
             <div class="chart-options">
-              <div class="chart-option-item">
+              <div
+                id="opportunityMetricsButton"
+                class="chart-option-item"
+                onclick="toggleMetricsTable('opportunity')">
                 <div class="text">Metrics</div>
               </div>
-              <div class="chart-option-item">
+              <div
+                id="opportunityPoliciesButton"
+                class="chart-option-item"
+                onclick="togglePoliciesTable('opportunity')">
                 <div class="text">Policies</div>
               </div>
             </div>
+          </div>
+          <div class="col-12 col-12-sm chart-metric-table-col">
+            <table id="opportunityMetricsTable" class="chart-metric-table hidden"></table>
+          </div>
+          <div class="col-12 col-12-sm chart-policy-table-col">
+            <table id="opportunityPoliciesTable" class="chart-policy-table hidden"></table>
+          </div>
+        </div>
+
+        <div class="row chart-metric-row">
+          <div class="col-3 col-6-sm">
+            <div class="chart-category">
+              <div class="chart-category-image">
+                <img src="assets/education.png" width="45" height="42" />
+              </div>
+              <div class="chart-category-text">Education</div>
+            </div>
+          </div>
+          <div class="col-6 col-12-sm chart-indicator-col">
+            <div class="chart-indicator">
+              <div class="chart-indicator-bar">
+                <div id="educationBar" class="chart-indicator-bar-fill green--light">
+                  <div id="educationValue" class="chart-indicator-value"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 col-6-sm">
+            <div class="chart-options">
+              <div
+                id="educationMetricsButton"
+                class="chart-option-item"
+                onclick="toggleMetricsTable('education')">
+                <div class="text">Metrics</div>
+              </div>
+              <div
+                id="educationPoliciesButton"
+                class="chart-option-item"
+                onclick="togglePoliciesTable('education')">
+                <div class="text">Policies</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-12-sm chart-metric-table-col">
+            <table id="educationMetricsTable" class="chart-metric-table hidden"></table>
+          </div>
+          <div class="col-12 col-12-sm chart-policy-table-col">
+            <table id="educationPoliciesTable" class="chart-policy-table hidden"></table>
+          </div>
+        </div>
+
+        <div class="row chart-metric-row">
+          <div class="col-3 col-6-sm">
+            <div class="chart-category">
+              <div class="chart-category-image">
+                <img src="assets/safety.png" width="45" height="42" />
+              </div>
+              <div class="chart-category-text">Safety</div>
+            </div>
+          </div>
+          <div class="col-6 col-12-sm chart-indicator-col">
+            <div class="chart-indicator">
+              <div class="chart-indicator-bar">
+                <div id="safetyBar" class="chart-indicator-bar-fill green--light">
+                  <div id="safetyValue" class="chart-indicator-value"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 col-6-sm">
+            <div class="chart-options">
+              <div
+                id="safetyMetricsButton"
+                class="chart-option-item"
+                onclick="toggleMetricsTable('safety')">
+                <div class="text">Metrics</div>
+              </div>
+              <div
+                id="safetyPoliciesButton"
+                class="chart-option-item"
+                onclick="togglePoliciesTable('safety')">
+                <div class="text">Policies</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-12-sm chart-metric-table-col">
+            <table id="safetyMetricsTable" class="chart-metric-table hidden"></table>
+          </div>
+          <div class="col-12 col-12-sm chart-policy-table-col">
+            <table id="safetyPoliciesTable" class="chart-policy-table hidden"></table>
           </div>
         </div>
       </div>
@@ -292,30 +479,26 @@
             Suprised by the score?
             <br />
             <br />
-            Issues surrounding livable communities are complex and
-            interconnected.
+            Issues surrounding livable communities are complex and interconnected.
           </div>
         </div>
         <div class="col-4 col-12-sm">
           <div class="chart-footer-text">
-            Understanding the basic concepts and terms around the AARP
-            Livability Index is one step toward improving livability.
+            Understanding the basic concepts and terms around the AARP Livability Index is one step
+            toward improving livability.
           </div>
         </div>
         <div class="col-4 col-12-sm">
           <div class="chart-footer-text">
-            Personalize your overall score results based on what livability
-            categories matter most to you.
+            Personalize your overall score results based on what livability categories matter most
+            to you.
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-4 col-12-sm">
           <div class="chart-footer-link">
-            <a href="#"
-              >Learn more about our methodology and the key factors of
-              livability ></a
-            >
+            <a href="#">Learn more about our methodology and the key factors of livability ></a>
           </div>
         </div>
         <div class="col-4 col-12-sm">
@@ -338,21 +521,17 @@
             Suprised by the score?
             <br />
             <br />
-            Issues surrounding livable communities are complex and
-            interconnected.
+            Issues surrounding livable communities are complex and interconnected.
           </div>
           <div class="chart-footer-link">
-            <a href="#"
-              >Learn more about our methodology and the key factors of
-              livability ></a
-            >
+            <a href="#">Learn more about our methodology and the key factors of livability ></a>
           </div>
         </div>
         <div class="col-4 col-12-sm">
           <div class="chart-footer-title">Key Terms</div>
           <div class="chart-footer-text">
-            Understanding the basic concepts and terms around the AARP
-            Livability Index is one step toward improving livability.
+            Understanding the basic concepts and terms around the AARP Livability Index is one step
+            toward improving livability.
           </div>
           <div class="col-4 col-12-sm">
             <div class="chart-footer-link">
@@ -363,8 +542,8 @@
         <div class="col-4 col-12-sm">
           <div class="chart-footer-title">Customize Your Score</div>
           <div class="chart-footer-text">
-            Personalize your overall score results based on what livability
-            categories matter most to you.
+            Personalize your overall score results based on what livability categories matter most
+            to you.
           </div>
           <div class="chart-footer-link">
             <a href="#">Visit the customization tool ></a>
@@ -375,8 +554,21 @@
   </body>
   <script>
     const DEFAULT_SUBURB = "PINETOWN";
+    const CATEGORY_MAP = {
+      "Education Opportunities": "education",
+      Engagement: "engagement",
+      Environment: "environment",
+      Health: "health",
+      Housing: "housing",
+      Neighbourhood: "neighbourhood",
+      Opportunity: "opportunity",
+      Transport: "transportation",
+      Safety: "safety",
+    };
+
     let suburbs = [];
     let categories = {};
+    let categoryPolicies = {};
 
     function loadSuburbs() {
       return new Promise((resolve, reject) => {
@@ -423,50 +615,237 @@
       });
     }
 
+    function getLivabilityIndexValues(suburb) {
+      return new Promise((resolve, reject) => {
+        const url = `https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/Suburb_Liveability_Index_Values/FeatureServer/0/query?outFields=*&where=Suburb = '${suburb}'&f=geojson`;
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const indexValues = {};
+            data.features.forEach((feature) => {
+              const category = feature.properties.Category;
+              const value = {
+                index_value: feature.properties.Index_Value,
+                type: feature.properties.Type,
+                median_index_value: feature.properties.Median_Index_Value,
+                rank: feature.properties.Rank,
+              };
+
+              indexValues[category] = indexValues[category] || [];
+              indexValues[category].push(value);
+            });
+
+            Object.keys(indexValues).forEach((category) => {
+              indexValues[category].sort((a, b) => {
+                return a.type.localeCompare(b.type);
+              });
+            });
+            resolve(indexValues);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    }
+
+    function loadCategoryPolicies() {
+      const url =
+        "https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/Liveability_Category_By_Laws/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson";
+
+      return new Promise((resolve, reject) => {
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const categories = {};
+            data.features.forEach((feature) => {
+              const properties = feature.properties;
+              const category = properties.Liveability_Category;
+              const name = properties.By_Law_Name;
+              const url = properties.By_Law_URL;
+              const date = properties.Date_Published;
+              const domain = new URL(url).hostname;
+              categories[category] = categories[category] || [];
+              categories[category].push({
+                name: name,
+                url: url,
+                date: date,
+                domain: domain,
+              });
+            });
+
+            Object.keys(categories).forEach((category) => {
+              categories[category].sort((a, b) => {
+                return a.name.localeCompare(b.name);
+              });
+            });
+            resolve(categories);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    }
+
+    function resetChart() {
+      Object.values(CATEGORY_MAP).forEach((category) => {
+        document.getElementById(`${category}Bar`).style.width = "0%";
+        document.getElementById(`${category}Value`).textContent = "";
+      });
+    }
+
     function updateChart(categories) {
-      document.getElementById("housingBar").style.width =
-        categories["Housing"].index_value + "%";
-      document.getElementById("housingValue").textContent =
-        categories["Housing"].index_value;
+      // console.log(categories);
 
-      document.getElementById("neighbourhoodBar").style.width =
-        categories["Neighbourhood"].index_value + "%";
-      document.getElementById("neighbourhoodValue").textContent =
-        categories["Neighbourhood"].index_value;
+      Object.entries(CATEGORY_MAP).forEach(([key, value]) => {
+        document.getElementById(`${value}Bar`).style.width = categories[key].index_value + "%";
+        document.getElementById(`${value}Value`).textContent = categories[key].index_value;
+      });
+    }
 
-      document.getElementById("transportationBar").style.width =
-        categories["Transport"].index_value + "%";
-      document.getElementById("transportationValue").textContent =
-        categories["Transport"].index_value;
+    function createChartPolicies(categoryPolicies) {
+      // console.log(categoryPolicies);
+      Object.keys(categoryPolicies).forEach((key) => {
+        const categoryKey = CATEGORY_MAP[key];
+        if (!categoryKey) {
+          return;
+        }
 
-      document.getElementById("environmentBar").style.width =
-        categories["Environment"].index_value + "%";
-      document.getElementById("environmentValue").textContent =
-        categories["Environment"].index_value;
+        const tableEl = document.getElementById(`${categoryKey}PoliciesTable`);
+        if (!tableEl) {
+          return;
+        }
 
-      document.getElementById("healthBar").style.width =
-        categories["Health"].index_value + "%";
-      document.getElementById("healthValue").textContent =
-        categories["Health"].index_value;
+        tableEl.innerHTML = "";
 
-      document.getElementById("engagementBar").style.width =
-        categories["Engagement"].index_value + "%";
-      document.getElementById("engagementValue").textContent =
-        categories["Engagement"].index_value;
+        const colgroup = document.createElement("colgroup");
+        colgroup.innerHTML = `
+          <col span="1" />
+          <col span="1" style="width: 160px;" />
+          <col span="1" style="width: 120px;" />
+        `;
 
-      document.getElementById("opportunityBar").style.width =
-        categories["Opportunity"].index_value + "%";
-      document.getElementById("opportunityValue").textContent =
-        categories["Opportunity"].index_value;
+        tableEl.appendChild(colgroup);
+
+        const thead = document.createElement("thead");
+        const tr = document.createElement("tr");
+        thead.appendChild(tr);
+        const th1 = document.createElement("th");
+        th1.textContent = `${key} Policies`;
+        tr.appendChild(th1);
+        const th2 = document.createElement("th");
+        th2.textContent = "URL";
+        tr.appendChild(th2);
+        const th3 = document.createElement("th");
+        th3.textContent = "Date";
+        tr.appendChild(th3);
+        tableEl.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        categoryPolicies[key].forEach((policy) => {
+          const tr = document.createElement("tr");
+          tbody.appendChild(tr);
+          const td1 = document.createElement("td");
+          td1.textContent = policy.name;
+          tr.appendChild(td1);
+          const td2 = document.createElement("td");
+          const a = document.createElement("a");
+          a.href = policy.url;
+          a.target = "_blank";
+          a.textContent = policy.domain;
+          td2.appendChild(a);
+          tr.appendChild(td2);
+          const td3 = document.createElement("td");
+          td3.textContent = policy.date;
+          tr.appendChild(td3);
+        });
+
+        tableEl.appendChild(tbody);
+      });
+    }
+
+    function createChartMetrics(metrics) {
+      // console.log(metrics);
+
+      Object.keys(metrics).forEach((key) => {
+        const categoryKey = CATEGORY_MAP[key];
+        if (!categoryKey) {
+          return;
+        }
+
+        const tableEl = document.getElementById(`${categoryKey}MetricsTable`);
+        if (!tableEl) {
+          return;
+        }
+
+        tableEl.innerHTML = "";
+
+        const colgroup = document.createElement("colgroup");
+        colgroup.innerHTML = `
+          <col span="1" />
+          <col span="1" style="width: 80px;" />
+          <col span="1" style="width: 100px;" />
+          <col span="1" style="width: 80px;" />
+        `;
+
+        tableEl.appendChild(colgroup);
+
+        const thead = document.createElement("thead");
+        const tr = document.createElement("tr");
+        thead.appendChild(tr);
+        const th1 = document.createElement("th");
+        th1.textContent = `${key} Metrics`;
+        tr.appendChild(th1);
+        const th2 = document.createElement("th");
+        th2.textContent = "Index";
+        tr.appendChild(th2);
+        const th3 = document.createElement("th");
+        th3.textContent = "Median Index";
+        tr.appendChild(th3);
+        tableEl.appendChild(thead);
+        const th4 = document.createElement("th");
+        th4.textContent = "Rank";
+        tr.appendChild(th4);
+        tableEl.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        metrics[key].forEach((metric) => {
+          const tr = document.createElement("tr");
+          tbody.appendChild(tr);
+          const td1 = document.createElement("td");
+          td1.textContent = metric.type;
+          tr.appendChild(td1);
+          const td2 = document.createElement("td");
+          td2.textContent = metric.index_value;
+          tr.appendChild(td2);
+          const td3 = document.createElement("td");
+          td3.textContent = metric.median_index_value;
+          tr.appendChild(td3);
+          const td4 = document.createElement("td");
+          td4.textContent = metric.rank;
+          tr.appendChild(td4);
+        });
+
+        tableEl.appendChild(tbody);
+      });
     }
 
     loadSuburbs().then((data) => {
       suburbs = data;
-      console.log(suburbs);
+      // console.log(suburbs);
     });
 
     function loadChartData(suburb) {
+      if (Object.keys(categoryPolicies) == 0) {
+        loadCategoryPolicies().then((data) => {
+          categoryPolicies = data;
+          createChartPolicies(categoryPolicies);
+        });
+      }
+
       getLivabilityCategories(suburb).then((categories) => {
+        getLivabilityIndexValues(suburb).then((indexValues) => {
+          createChartMetrics(indexValues);
+        });
         updateChart(categories);
       });
     }
@@ -481,7 +860,6 @@
     suburbListEl.addEventListener("click", selectSuburbItem);
 
     function clearSuburbAutocomplete(event) {
-      // console.log(event);
       suburbListEl.innerHTML = "";
     }
 
@@ -538,8 +916,23 @@
         suburbInputEl.value = suburb;
         suburbListEl.innerHTML = ``;
         currentSuburbTextEl.textContent = suburb;
+        // resetChart();
         loadChartData(suburb);
       }
+    }
+
+    function toggleMetricsTable(category) {
+      document.getElementById(`${category}PoliciesButton`).classList.remove("active");
+      document.getElementById(`${category}MetricsButton`).classList.toggle("active");
+      document.getElementById(`${category}PoliciesTable`).classList.add("hidden");
+      document.getElementById(`${category}MetricsTable`).classList.toggle("hidden");
+    }
+
+    function togglePoliciesTable(category) {
+      document.getElementById(`${category}MetricsButton`).classList.remove("active");
+      document.getElementById(`${category}PoliciesButton`).classList.toggle("active");
+      document.getElementById(`${category}MetricsTable`).classList.add("hidden");
+      document.getElementById(`${category}PoliciesTable`).classList.toggle("hidden");
     }
 
     // Load initial chart data

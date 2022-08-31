@@ -1,6 +1,7 @@
 :root {
   --eth-blue: rgb(19, 115, 218);
   --eth-yellow: rgb(254, 205, 0);
+  --eth-green: rgb(0, 150, 12);
 }
 
 .suburb-container {
@@ -142,6 +143,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  user-select: none;
 }
 
 .chart-option-item::after {
@@ -153,10 +155,21 @@
   background-repeat: no-repeat;
   margin-top: 1px;
   margin-left: 8px;
+  will-change: transform;
+  transition: 0.25s;
+}
+
+.chart-option-item.active::after {
+  transform: scaleY(-1);
 }
 
 .chart-indicator-col {
   order: 3;
+}
+
+.chart-metric-table-col,
+.chart-policy-table-col {
+  order: 4;
 }
 
 .chart-indicator {
@@ -187,10 +200,12 @@
 .chart-indicator-bar-fill {
   border-radius: 10px;
   border: 2px solid #fff;
-  /* border-right-width: 4px; */
   position: absolute;
   height: 19px;
   top: 0;
+  width: 0%;
+  will-change: transform;
+  transition: width 0.8s ease-in-out;
 }
 
 .chart-indicator-bar-fill.blue {
@@ -239,12 +254,63 @@
   color: var(--eth-blue);
 }
 
+.chart-metric-table,
+.chart-policy-table {
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid var(--eth-blue);
+  border-radius: 5px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+.chart-metric-table a,
+.chart-policy-table a {
+  color: var(--eth-blue);
+  font-weight: 500;
+}
+
+.chart-metric-table thead,
+.chart-policy-table thead {
+  /* border-bottom: 1px solid var(--eth-blue); */
+  background-color: var(--eth-blue);
+  color: #fff;
+  height: 50px;
+  font-weight: 500;
+}
+
+.chart-policy-table {
+  border-color: var(--eth-green);
+}
+
+.chart-policy-table thead {
+  background-color: var(--eth-green);
+}
+
+.chart-metric-table th,
+.chart-policy-table th,
+.chart-metric-table td,
+.chart-policy-table td {
+  text-align: left;
+  padding: 10px;
+}
+
+.chart-metric-table td.chart-metric-table-value {
+  /* text-align: right; */
+}
+
 @media (min-width: 768px) {
   .chart-metric-row {
     margin: 10px 0 20px;
   }
 
   .chart-indicator-col {
+    order: initial;
+  }
+
+  .chart-metric-table-col,
+  .chart-policy-table-col {
     order: initial;
   }
 

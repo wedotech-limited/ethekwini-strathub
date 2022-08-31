@@ -203,7 +203,7 @@
   width: 100%;
   position: absolute;
   text-align: right;
-  top: 18px;
+  top: 14px;
   font-size: 14px;
   font-weight: 500;
 }
@@ -224,7 +224,7 @@
   width: 0%;
   will-change: transform;
   transition: width 0.8s ease-in-out;
-  border-right: 4px solid rgba(0, 0, 0, 0.3);
+  border-right: 3px solid rgba(0, 0, 0, 0.3);
   height: 15px;
   top: 2px;
 }
@@ -233,10 +233,11 @@
   width: 100%;
   position: absolute;
   text-align: right;
-  top: 18px;
+  top: 28px;
   font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.3);
+  right: -10px;
 }
 
 .chart-indicator-bar-fill.blue {
@@ -261,6 +262,10 @@
 
 .chart-footer {
   margin-top: 20px;
+}
+
+.chart-footer-col {
+  padding: 0 10px;
 }
 
 .chart-footer-title {

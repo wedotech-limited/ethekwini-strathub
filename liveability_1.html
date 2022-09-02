@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <title>WeDoTech - eThekwini Liveability</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="base_1.css" />
+    <link rel="stylesheet" href="liveability_1.css" />
+
+    <script>
+      document.documentElement.className += window.self == window.top ? " top" : " framed";
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="suburb-container">
+        <div class="suburb-title">Suburb</div>
+        <div class="suburb-input-container">
+          <input id="suburbInput" class="suburb-input" type="text" />
+          <ul id="suburbList" class="suburb-list"></ul>
+          <div class="suburb-hint">Choose suburb above</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="title">Overview</div>
+          <div class="row">
+            <div class="col-12-sm col-12-md col-8-xl col-6-xxl">
+              <div class="overview-chart">
+                <div class="overview-chart-bg"></div>
+                <div class="overview-chart-circle-outer"></div>
+                <div class="overview-chart-circle-inner"></div>
+                <div class="overview-chart-indicator indicator-range-1">
+                  <div class="overview-chart-indicator-inner"></div>
+                </div>
+                <div class="overview-chart-indicator indicator-range-2">
+                  <div class="overview-chart-indicator-inner"></div>
+                </div>
+                <div class="overview-chart-indicator indicator-range-3">
+                  <div class="overview-chart-indicator-inner"></div>
+                </div>
+                <div class="overview-chart-indicator indicator-range-4">
+                  <div class="overview-chart-indicator-inner"></div>
+                </div>
+                <div class="overview-chart-indicator indicator-range-5">
+                  <div class="overview-chart-indicator-inner"></div>
+                </div>
+                <div class="overview-chart-indicator-white-line-outer"></div>
+                <div class="overview-chart-indicator-white-line-inner"></div>
+                <div class="overview-chart-indicator-range-label indicator-range-0">0</div>
+                <div class="overview-chart-indicator-range-label indicator-range-20">20</div>
+                <div class="overview-chart-indicator-range-label indicator-range-40">40</div>
+                <div class="overview-chart-indicator-range-label indicator-range-60">60</div>
+                <div class="overview-chart-indicator-range-label indicator-range-80">80</div>
+                <div class="overview-chart-indicator-range-label indicator-range-100">100</div>
+                <div
+                  id="overviewChartIndicatorPointer"
+                  class="overview-chart-indicator-pointer"></div>
+
+                <div class="overview-chart-indicator-circle-value"></div>
+                <div class="overview-chart-indicator-bottom-mask"></div>
+                <div class="overview-chart-liveability-score-container">
+                  <div
+                    id="overviewChartLiveabilityScore"
+                    class="overview-chart-liveability-score-value">
+                    50
+                  </div>
+                  <div class="overview-chart-liveability-score-label">Liveability Score</div>
+                </div>
+                <div class="overview-chart-population-container">
+                  <div class="overview-chart-population-label">Total Population</div>
+                  <div id="overviewChartPopulation" class="overview-chart-population-value"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12-sm col-12-md col-4-xl col-6-xxl">
+              <div class="overview-table">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="overview-table-title">Information</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="overview-metric-heading">Housing</div>
+                        <div class="overview-metric-container">
+                          <div id="overviewHousingMarketValue" class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Avg. Property Market Value</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewHousingPropertyValuation"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Avg. Property Valuation</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewHousingSubsidisedValuation"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">
+                            Avg. Subsidised Property Valuation
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="overview-metric-heading">Neighbourhood</div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewNeighbourhoodHallsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Community Halls Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewNeighbourhoodLibrariesValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Libraries Within 5kms</div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="overview-metric-heading">Transportation</div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewTransportationBusValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Bus & Taxi Ranks Within 5kms</div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="overview-metric-heading">Environment</div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewEnvironmentGeohazardsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Geohazards</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="overview-metric-heading">Health</div>
+                        <div class="overview-metric-container">
+                          <div id="overviewHealthAreasValue" class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Health Areas</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewHealthHospitalsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Hospitals Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewHealthMobileClinicsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Mobile Clinics Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewHealthFixedClinicsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Fixed Clinics Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div id="overviewHealthParksValue" class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Regional Parks</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div id="overviewHealthPoolsValue" class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Swimming Pools Within 5kms</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="title">Category Scores</div>
+          <div class="description">
+            These are the category scores for <span id="currentSuburbText"></span>. Explore the
+            metrics and policies behind the numbers.
+          </div>
+          <div class="chart">
+            <div class="row">
+              <div class="col-3 hidden-sm"></div>
+              <div class="col-6">
+                <div class="chart-scale">
+                  <div class="chart-scale-0">0</div>
+                  <div class="chart-scale-50">
+                    <div class="chart-scale-avg-text">National Average</div>
+                    <div>50</div>
+                  </div>
+                  <div class="chart-scale-100">100</div>
+                </div>
+              </div>
+              <div class="col-3 hidden-sm"></div>
+            </div>
+
+            <div class="row chart-metric-row">
+              <div class="col-3 col-6-sm">
+                <div class="chart-category">
+                  <div class="chart-category-image">
+                    <img src="assets/housing.png" width="45" height="42" />
+                  </div>
+                  <div class="chart-category-text">Housing</div>
+                </div>
+              </div>
+              <div class="col-6 col-12-sm chart-indicator-col">
+                <div class="chart-indicator">
+                  <div class="chart-indicator-bar">
+                    <div id="housingBar" class="chart-indicator-bar-fill yellow">
+                      <div id="housingValue" class="chart-indicator-value"></div>
+                    </div>
+                    <div id="housingMedianBar" class="chart-indicator-median-bar-fill">
+                      <div id="housingMedianValue" class="chart-indicator-median-value"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 col-6-sm">
+                <div class="chart-options">
+                  <div
+                    id="housingMetricsButton"
+                    class="chart-option-item"
+                    onclick="toggleMetricsTable('housing')">
+                    <div class="text">Metrics</div>
+                  </div>
+                  <div
+                    id="housingPoliciesButton"
+                    class="chart-option-item"
+                    onclick="togglePoliciesTable('housing')">
+                    <div class="text">Policies</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-12-sm chart-metric-table-col">
+                <table id="housingMetricsTable" class="chart-metric-table hidden"></table>
+              </div>
+              <div class="col-12 col-12-sm chart-policy-table-col">
+                <table id="housingPoliciesTable" class="chart-policy-table hidden"></table>
+              </div>
+            </div>
+
+            <div class="row chart-metric-row">
+              <div class="col-3 col-6-sm">
+                <div class="chart-category">
+                  <div class="chart-category-image">
+                    <img src="assets/neighbourhoood.png" width="25" height="42" />
+                  </div>
+                  <div class="chart-category-text">Neighbourhood</div>
+                </div>
+              </div>
+              <div class="col-6 col-12-sm chart-indicator-col">
+                <div class="chart-indicator">
+                  <div class="chart-indicator-bar">
+                    <div id="neighbourhoodBar" class="chart-indicator-bar-fill green--light">
+                      <div id="neighbourhoodValue" class="chart-indicator-value"></div>
+                    </div>
+                    <div id="neighbourhoodMedianBar" class="chart-indicator-median-bar-fill">
+                      <div id="neighbourhoodMedianValue" class="chart-indicator-median-value"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 col-6-sm">
+                <div class="chart-options">
+                  <div
+                    id="neighbourhoodMetricsButton"
+                    class="chart-option-item"
+                    onclick="toggleMetricsTable('neighbourhood')">
+                    <div class="text">Metrics</div>
+                  </div>
+                  <div
+                    id="neighbourhoodPoliciesButton"
+                    class="chart-option-item"
+                    onclick="togglePoliciesTable('neighbourhood')">
+                    <div class="text">Policies</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-12-sm chart-metric-table-col">
+                <table id="neighbourhoodMetricsTable" class="chart-metric-table hidden"></table>
+              </div>
+              <div class="col-12 col-12-sm chart-policy-table-col">
+                <table id="neighbourhoodPoliciesTable" class="chart-policy-table hidden"></table>
+              </div>
+            </div>
+
+            <div class="row chart-metric-row">
+              <div class="col-3 col-6-sm">
+                <div class="chart-category">
+                  <div class="chart-category-image">
+                    <img src="assets/transportation.png" width="45" height="42" />
+                  </div>
+                  <div class="chart-category-text">Transportation</div>
+                </div>
+              </div>
+              <div class="col-6 col-12-sm chart-indicator-col">
+                <div class="chart-indicator">
+                  <div class="chart-indicator-bar">
+                    <div id="transportationBar" class="chart-indicator-bar-fill green">
+                      <div id="transportationValue" class="chart-indicator-value"></div>
+                    </div>
+                    <div id="transportationMedianBar" class="chart-indicator-median-bar-fill">
+                      <div
+                        id="transportationMedianValue"
+                        class="chart-indicator-median-value"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 col-6-sm">
+                <div class="chart-options">
+                  <div
+                    id="transportationMetricsButton"
+                    class="chart-option-item"
+                    onclick="toggleMetricsTable('transportation')">
+                    <div class="text">Metrics</div>
+                  </div>
+                  <div
+                    id="transportationPoliciesButton"
+                    class="chart-option-item"
+                    onclick="togglePoliciesTable('transportation')">
+                    <div class="text">Policies</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-12-sm chart-metric-table-col">
+                <table id="transportationMetricsTable" class="chart-metric-table hidden"></table>
+              </div>
+              <div class="col-12 col-12-sm chart-policy-table-col">
+                <table id="transportationPoliciesTable" class="chart-policy-table hidden"></table>
+              </div>
+            </div>
+
+            <div class="row chart-metric-row">
+              <div class="col-3 col-6-sm">
+                <div class="chart-category">
+                  <div class="chart-category-image">
+                    <img src="assets/environment.png" width="45" height="42" />
+                  </div>
+                  <div class="chart-category-text">Environment</div>
+                </div>
+              </div>
+              <div class="col-6 col-12-sm chart-indicator-col">
+                <div class="chart-indicator">
+                  <div class="chart-indicator-bar">
+                    <div id="environmentBar" class="chart-indicator-bar-fill blue">
+                      <div id="environmentValue" class="chart-indicator-value"></div>
+                    </div>
+                    <div id="environmentMedianBar" class="chart-indicator-median-bar-fill">
+                      <div id="environmentMedianValue" class="chart-indicator-median-value"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 col-6-sm">
+                <div class="chart-options">
+                  <div
+                    id="environmentMetricsButton"
+                    class="chart-option-item"
+                    onclick="toggleMetricsTable('environment')">
+                    <div class="text">Metrics</div>
+                  </div>
+                  <div
+                    id="environmentPoliciesButton"
+                    class="chart-option-item"
+                    onclick="togglePoliciesTable('environment')">
+                    <div class="text">Policies</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-12-sm chart-metric-table-col">
+                <table id="environmentMetricsTable" class="chart-metric-table hidden"></table>
+              </div>
+              <div class="col-12 col-12-sm chart-policy-table-col">
+                <table id="environmentPoliciesTable" class="chart-policy-table hidden"></table>
+              </div>
+            </div>
+
+            <div class="row chart-metric-row">
+              <div class="col-3 col-6-sm">
+                <div class="chart-category">
+                  <div class="chart-category-image">
+                    <img src="assets/health.png" width="45" height="42" />
+                  </div>
+                  <div class="chart-category-text">Health</div>
+                </div>
+              </div>
+              <div class="col-6 col-12-sm chart-indicator-col">
+                <div class="chart-indicator">
+                  <div class="chart-indicator-bar">
+                    <div id="healthBar" class="chart-indicator-bar-fill blue">
+                      <div id="healthValue" class="chart-indicator-value"></div>
+                    </div>
+                    <div id="healthMedianBar" class="chart-indicator-median-bar-fill">
+                      <div id="healthMedianValue" class="chart-indicator-median-value"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 col-6-sm">
+                <div class="chart-options">
+                  <div
+                    id="healthMetricsButton"
+                    class="chart-option-item"
+                    onclick="toggleMetricsTable('health')">
+                    <div class="text">Metrics</div>
+                  </div>
+                  <div
+                    id="healthPoliciesButton"
+                    class="chart-option-item"
+                    onclick="togglePoliciesTable('health')">
+                    <div class="text">Policies</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-12-sm chart-metric-table-col">
+                <table id="healthMetricsTable" class="chart-metric-table hidden"></table>
+              </div>
+              <div class="col-12 col-12-sm chart-policy-table-col">
+                <table id="healthPoliciesTable" class="chart-policy-table hidden"></table>
+              </div>
+            </div>
+
+            <div class="row chart-metric-row">
+              <div class="col-3 col-6-sm">
+                <div class="chart-category">
+                  <div class="chart-category-image">
+                    <img src="assets/engagement.png" width="45" height="42" />
+                  </div>
+                  <div class="chart-category-text">Engagement</div>
+                </div>
+              </div>
+              <div class="col-6 col-12-sm chart-indicator-col">
+                <div class="chart-indicator">
+                  <div class="chart-indicator-bar">
+                    <div id="engagementBar" class="chart-indicator-bar-fill blue--dark">
+                      <div id="engagementValue" class="chart-indicator-value"></div>
+                    </div>
+                    <div id="engagementMedianBar" class="chart-indicator-median-bar-fill">
+                      <div id="engagementMedianValue" class="chart-indicator-median-value"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 col-6-sm">
+                <div class="chart-options">
+                  <div
+                    id="engagementMetricsButton"
+                    class="chart-option-item"
+                    onclick="toggleMetricsTable('engagement')">
+                    <div class="text">Metrics</div>
+                  </div>
+                  <div
+                    id="engagementPoliciesButton"
+                    class="chart-option-item"
+                    onclick="togglePoliciesTable('engagement')">
+                    <div class="text">Policies</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-12-sm chart-metric-table-col">
+                <table id="engagementMetricsTable" class="chart-metric-table hidden"></table>
+              </div>
+              <div class="col-12 col-12-sm chart-policy-table-col">
+                <table id="engagementPoliciesTable" class="chart-policy-table hidden"></table>
+              </div>
+            </div>
+
+            <div class="row chart-metric-row">
+              <div class="col-3 col-6-sm">
+                <div class="chart-category">
+                  <div class="chart-category-image">
+                    <img src="assets/opportunity.png" width="45" height="42" />
+                  </div>
+                  <div class="chart-category-text">Opportunity</div>
+                </div>
+              </div>
+              <div class="col-6 col-12-sm chart-indicator-col">
+                <div class="chart-indicator">
+                  <div class="chart-indicator-bar">
+                    <div id="opportunityBar" class="chart-indicator-bar-fill green">
+                      <div id="opportunityValue" class="chart-indicator-value"></div>
+                    </div>
+                    <div id="opportunityMedianBar" class="chart-indicator-median-bar-fill">
+                      <div id="opportunityMedianValue" class="chart-indicator-median-value"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 col-6-sm">
+                <div class="chart-options">
+                  <div
+                    id="opportunityMetricsButton"
+                    class="chart-option-item"
+                    onclick="toggleMetricsTable('opportunity')">
+                    <div class="text">Metrics</div>
+                  </div>
+                  <div
+                    id="opportunityPoliciesButton"
+                    class="chart-option-item"
+                    onclick="togglePoliciesTable('opportunity')">
+                    <div class="text">Policies</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-12-sm chart-metric-table-col">
+                <table id="opportunityMetricsTable" class="chart-metric-table hidden"></table>
+              </div>
+              <div class="col-12 col-12-sm chart-policy-table-col">
+                <table id="opportunityPoliciesTable" class="chart-policy-table hidden"></table>
+              </div>
+            </div>
+
+            <div class="row chart-metric-row">
+              <div class="col-3 col-6-sm">
+                <div class="chart-category">
+                  <div class="chart-category-image">
+                    <img src="assets/education.png" width="45" height="42" />
+                  </div>
+                  <div class="chart-category-text">Education</div>
+                </div>
+              </div>
+              <div class="col-6 col-12-sm chart-indicator-col">
+                <div class="chart-indicator">
+                  <div class="chart-indicator-bar">
+                    <div id="educationBar" class="chart-indicator-bar-fill green--light">
+                      <div id="educationValue" class="chart-indicator-value"></div>
+                    </div>
+                    <div id="educationMedianBar" class="chart-indicator-median-bar-fill">
+                      <div id="educationMedianValue" class="chart-indicator-median-value"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 col-6-sm">
+                <div class="chart-options">
+                  <div
+                    id="educationMetricsButton"
+                    class="chart-option-item"
+                    onclick="toggleMetricsTable('education')">
+                    <div class="text">Metrics</div>
+                  </div>
+                  <div
+                    id="educationPoliciesButton"
+                    class="chart-option-item"
+                    onclick="togglePoliciesTable('education')">
+                    <div class="text">Policies</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-12-sm chart-metric-table-col">
+                <table id="educationMetricsTable" class="chart-metric-table hidden"></table>
+              </div>
+              <div class="col-12 col-12-sm chart-policy-table-col">
+                <table id="educationPoliciesTable" class="chart-policy-table hidden"></table>
+              </div>
+            </div>
+
+            <div class="row chart-metric-row">
+              <div class="col-3 col-6-sm">
+                <div class="chart-category">
+                  <div class="chart-category-image">
+                    <img src="assets/safety.png" width="45" height="42" />
+                  </div>
+                  <div class="chart-category-text">Safety</div>
+                </div>
+              </div>
+              <div class="col-6 col-12-sm chart-indicator-col">
+                <div class="chart-indicator">
+                  <div class="chart-indicator-bar">
+                    <div id="safetyBar" class="chart-indicator-bar-fill green--light">
+                      <div id="safetyValue" class="chart-indicator-value"></div>
+                    </div>
+                    <div id="safetyMedianBar" class="chart-indicator-median-bar-fill">
+                      <div id="safetyMedianValue" class="chart-indicator-median-value"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 col-6-sm">
+                <div class="chart-options">
+                  <div
+                    id="safetyMetricsButton"
+                    class="chart-option-item"
+                    onclick="toggleMetricsTable('safety')">
+                    <div class="text">Metrics</div>
+                  </div>
+                  <div
+                    id="safetyPoliciesButton"
+                    class="chart-option-item"
+                    onclick="togglePoliciesTable('safety')">
+                    <div class="text">Policies</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-12-sm chart-metric-table-col">
+                <table id="safetyMetricsTable" class="chart-metric-table hidden"></table>
+              </div>
+              <div class="col-12 col-12-sm chart-policy-table-col">
+                <table id="safetyPoliciesTable" class="chart-policy-table hidden"></table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid hidden-sm">
+          <div class="row chart-footer">
+            <div class="col-6 col-12-sm chart-footer-col">
+              <div class="chart-footer-title">Scoring Essentials</div>
+            </div>
+            <div class="col-6 col-12-sm chart-footer-col">
+              <div class="chart-footer-title">Key Terms</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-12-sm chart-footer-col">
+              <div class="chart-footer-text">
+                Surprised by the score? Issues surrounding liveable communities are complex and
+                interconnected.
+              </div>
+            </div>
+            <div class="col-6 col-12-sm chart-footer-col">
+              <div class="chart-footer-text">
+                Understanding the basic concepts and terms around the Liveability Index is one step
+                toward improving liveability.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-12-sm chart-footer-col">
+              <div class="chart-footer-link">
+                <a href="#"
+                  >Learn more about our methodology and the key factors of liveability ></a
+                >
+              </div>
+            </div>
+            <div class="col-6 col-12-sm chart-footer-col">
+              <div class="chart-footer-link">
+                <a href="#">Learn more about the key terms we use. ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container hidden-md">
+          <div class="row chart-footer">
+            <div class="col-6 col-12-sm">
+              <div class="chart-footer-title">Scoring Essentials</div>
+              <div class="chart-footer-text">
+                Suprised by the score?
+                <br />
+                <br />
+                Issues surrounding liveable communities are complex and interconnected.
+              </div>
+              <div class="chart-footer-link">
+                <a href="#"
+                  >Learn more about our methodology and the key factors of liveability ></a
+                >
+              </div>
+            </div>
+            <div class="col-6 col-12-sm">
+              <div class="chart-footer-title">Key Terms</div>
+              <div class="chart-footer-text">
+                Understanding the basic concepts and terms around the AARP Liveability Index is one
+                step toward improving liveability.
+              </div>
+              <div class="col-6 col-12-sm">
+                <div class="chart-footer-link">
+                  <a href="#">Learn more about the key terms we use. > </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const DEFAULT_SUBURB = "PINETOWN";
+    const CATEGORY_MAP = {
+      "Education Opportunities": "education",
+      Engagement: "engagement",
+      Environment: "environment",
+      Health: "health",
+      Housing: "housing",
+      Neighbourhood: "neighbourhood",
+      Opportunity: "opportunity",
+      Transport: "transportation",
+      Safety: "safety",
+    };
+
+    let suburbs = [];
+    let categories = {};
+    let categoryPolicies = {};
+
+    function formatNumber(value) {
+      if (!value) {
+        return "0";
+      }
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function formatAmount(amount) {
+      return `R ${formatNumber(amount)}`;
+    }
+
+    function loadSuburbs() {
+      return new Promise((resolve, reject) => {
+        const url =
+          "https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/Suburb_Overview/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson";
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const features = data.features;
+            let suburbs = [];
+            features.forEach((feature) => {
+              suburbs.push(feature.properties);
+            });
+            // suburbs = suburbs.filter((s) => s.Suburb_Liveability_Index_Val != null);
+            suburbs.sort((a, b) => {
+              return a.Suburb.localeCompare(b.Suburb);
+            });
+            resolve(suburbs);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    }
+
+    function getLiveabilityCategories(suburb) {
+      return new Promise((resolve, reject) => {
+        const url = `https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/Suburb_Liveability_Index_Categories/FeatureServer/0/query?outFields=*&where=Suburb = '${suburb}'&f=geojson`;
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const categories = {};
+            data.features.forEach((feature) => {
+              categories[feature.properties.Category] = {
+                index_value: feature.properties.Index_Value,
+                median_index_value: feature.properties.Median_Index_Value,
+                rank: feature.properties.Rank,
+              };
+            });
+            resolve(categories);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    }
+
+    function getLiveabilityIndexValues(suburb) {
+      return new Promise((resolve, reject) => {
+        const url = `https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/Suburb_Liveability_Index_Values/FeatureServer/0/query?outFields=*&where=Suburb = '${suburb}'&f=geojson`;
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const indexValues = {};
+            data.features.forEach((feature) => {
+              const category = feature.properties.Category;
+              const value = {
+                index_value: feature.properties.Index_Value,
+                type: feature.properties.Type,
+                median_index_value: feature.properties.Median_Index_Value,
+                rank: feature.properties.Rank,
+              };
+
+              indexValues[category] = indexValues[category] || [];
+              indexValues[category].push(value);
+            });
+
+            Object.keys(indexValues).forEach((category) => {
+              indexValues[category].sort((a, b) => {
+                return a.type.localeCompare(b.type);
+              });
+            });
+            resolve(indexValues);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    }
+
+    function loadCategoryPolicies() {
+      const url =
+        "https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/Liveability_Category_By_Laws/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson";
+
+      return new Promise((resolve, reject) => {
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const categories = {};
+            data.features.forEach((feature) => {
+              const properties = feature.properties;
+              const category = properties.Liveability_Category;
+              const name = properties.By_Law_Name;
+              const url = properties.By_Law_URL;
+              const date = properties.Date_Published;
+              const domain = new URL(url).hostname;
+              categories[category] = categories[category] || [];
+              categories[category].push({
+                name: name,
+                url: url,
+                date: date,
+                domain: domain,
+              });
+            });
+
+            Object.keys(categories).forEach((category) => {
+              categories[category].sort((a, b) => {
+                return a.name.localeCompare(b.name);
+              });
+            });
+            resolve(categories);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    }
+
+    function resetChart() {
+      Object.values(CATEGORY_MAP).forEach((category) => {
+        document.getElementById(`${category}Bar`).style.width = "0%";
+        document.getElementById(`${category}Value`).textContent = "";
+        document.getElementById(`${category}MedianBar`).style.width = "0%";
+        document.getElementById(`${category}MedianValue`).textContent = "";
+      });
+    }
+
+    function updateChart(categories) {
+      // console.log(categories);
+
+      Object.entries(CATEGORY_MAP).forEach(([key, value]) => {
+        document.getElementById(`${value}Bar`).style.width = categories[key].index_value + "%";
+        document.getElementById(`${value}Value`).textContent = categories[key].index_value;
+        document.getElementById(`${value}MedianBar`).style.width =
+          categories[key].median_index_value + "%";
+        document.getElementById(`${value}MedianValue`).textContent =
+          categories[key].median_index_value;
+      });
+    }
+
+    function createChartPolicies(categoryPolicies) {
+      // console.log(categoryPolicies);
+      Object.keys(categoryPolicies).forEach((key) => {
+        const categoryKey = CATEGORY_MAP[key];
+        if (!categoryKey) {
+          return;
+        }
+
+        const tableEl = document.getElementById(`${categoryKey}PoliciesTable`);
+        if (!tableEl) {
+          return;
+        }
+
+        tableEl.innerHTML = "";
+
+        const colgroup = document.createElement("colgroup");
+        colgroup.innerHTML = `
+          <col span="1" />
+          <col span="1" style="width: 160px;" />
+          <col span="1" style="width: 120px;" />
+        `;
+
+        tableEl.appendChild(colgroup);
+
+        const thead = document.createElement("thead");
+        const tr = document.createElement("tr");
+        thead.appendChild(tr);
+        const th1 = document.createElement("th");
+        th1.textContent = `${key} Policies`;
+        tr.appendChild(th1);
+        const th2 = document.createElement("th");
+        th2.textContent = "URL";
+        tr.appendChild(th2);
+        const th3 = document.createElement("th");
+        th3.textContent = "Date";
+        tr.appendChild(th3);
+        tableEl.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        categoryPolicies[key].forEach((policy) => {
+          const tr = document.createElement("tr");
+          tbody.appendChild(tr);
+          const td1 = document.createElement("td");
+          td1.textContent = policy.name;
+          tr.appendChild(td1);
+          const td2 = document.createElement("td");
+          const a = document.createElement("a");
+          a.href = policy.url;
+          a.target = "_blank";
+          a.textContent = policy.domain;
+          td2.appendChild(a);
+          tr.appendChild(td2);
+          const td3 = document.createElement("td");
+          td3.textContent = policy.date;
+          tr.appendChild(td3);
+        });
+
+        tableEl.appendChild(tbody);
+      });
+    }
+
+    function createChartMetrics(metrics) {
+      // console.log(metrics);
+
+      Object.keys(metrics).forEach((key) => {
+        const categoryKey = CATEGORY_MAP[key];
+        if (!categoryKey) {
+          return;
+        }
+
+        const tableEl = document.getElementById(`${categoryKey}MetricsTable`);
+        if (!tableEl) {
+          return;
+        }
+
+        tableEl.innerHTML = "";
+
+        const colgroup = document.createElement("colgroup");
+        colgroup.innerHTML = `
+          <col span="1" />
+          <col span="1" style="width: 80px;" />
+          <col span="1" style="width: 100px;" />
+          <col span="1" style="width: 80px;" />
+        `;
+
+        tableEl.appendChild(colgroup);
+
+        const thead = document.createElement("thead");
+        const tr = document.createElement("tr");
+        thead.appendChild(tr);
+        const th1 = document.createElement("th");
+        th1.textContent = `${key} Metrics`;
+        tr.appendChild(th1);
+        const th2 = document.createElement("th");
+        th2.textContent = "Index";
+        tr.appendChild(th2);
+        const th3 = document.createElement("th");
+        th3.textContent = "Median Index";
+        tr.appendChild(th3);
+        tableEl.appendChild(thead);
+        const th4 = document.createElement("th");
+        th4.textContent = "Rank";
+        tr.appendChild(th4);
+        tableEl.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        metrics[key].forEach((metric) => {
+          const tr = document.createElement("tr");
+          tbody.appendChild(tr);
+          const td1 = document.createElement("td");
+          td1.textContent = metric.type;
+          tr.appendChild(td1);
+          const td2 = document.createElement("td");
+          td2.textContent = metric.index_value;
+          tr.appendChild(td2);
+          const td3 = document.createElement("td");
+          td3.textContent = metric.median_index_value;
+          tr.appendChild(td3);
+          const td4 = document.createElement("td");
+          td4.textContent = metric.rank;
+          tr.appendChild(td4);
+        });
+
+        tableEl.appendChild(tbody);
+      });
+    }
+
+    loadSuburbs().then((data) => {
+      suburbs = data;
+      // console.log(suburbs);
+    });
+
+    function getSuburbs() {
+      return new Promise((resolve, reject) => {
+        if (suburbs && suburbs.length > 0) {
+          resolve(suburbs);
+        } else {
+          loadSuburbs()
+            .then((data) => {
+              suburbs = data;
+              resolve(suburbs);
+            })
+            .catch((err) => {
+              reject(err);
+            });
+        }
+      });
+    }
+
+    function showSuburbInformation(suburb) {
+      getSuburbs().then((suburbs) => {
+        const suburbInfo = suburbs.find((s) => s.Suburb === suburb);
+        if (!suburbInfo) {
+          return;
+        }
+
+        document.getElementById("overviewChartPopulation").textContent = formatNumber(
+          suburbInfo.Total_Population
+        );
+        document.getElementById("overviewChartLiveabilityScore").textContent =
+          suburbInfo.Suburb_Liveability_Index_Val;
+        const pointerRotation = (suburbInfo.Suburb_Liveability_Index_Val - 50) * (90 / 50);
+        document.getElementById(
+          "overviewChartIndicatorPointer"
+        ).style.transform = `rotate(${pointerRotation}deg)`;
+
+        document.getElementById("overviewHousingMarketValue").textContent = formatAmount(
+          suburbInfo.Avg_Property_Market_Value
+        );
+        document.getElementById("overviewHousingPropertyValuation").textContent = formatAmount(
+          suburbInfo.Avg_Property_Valuation
+        );
+        document.getElementById("overviewHousingSubsidisedValuation").textContent = formatAmount(
+          suburbInfo.Avg_Subsidised_Property_Value
+        );
+
+        document.getElementById("overviewNeighbourhoodHallsValue").textContent = formatNumber(
+          suburbInfo.Num_Community_Halls_Within_5kms
+        );
+        document.getElementById("overviewNeighbourhoodLibrariesValue").textContent = formatNumber(
+          suburbInfo.Num_Libraries_Within_5kms
+        );
+
+        document.getElementById("overviewTransportationBusValue").textContent = formatNumber(
+          suburbInfo.Num_Bus_Taxi_Ranks_Within_5kms
+        );
+
+        document.getElementById("overviewEnvironmentGeohazardsValue").textContent = formatNumber(
+          suburbInfo.Num_Geohazards
+        );
+
+        document.getElementById("overviewHealthHospitalsValue").textContent = formatNumber(
+          suburbInfo.Num_Hospitals_Within_5kms
+        );
+        document.getElementById("overviewHealthAreasValue").textContent = formatNumber(
+          suburbInfo.Num_Health_Areas
+        );
+        document.getElementById("overviewHealthFixedClinicsValue").textContent = formatNumber(
+          suburbInfo.Num_Fixed_Clinics_Within_5kms
+        );
+        document.getElementById("overviewHealthMobileClinicsValue").textContent = formatNumber(
+          suburbInfo.Num_Mobile_Clinics_Within_5kms
+        );
+        document.getElementById("overviewHealthParksValue").textContent = formatNumber(
+          suburbInfo.Num_Regional_Parks
+        );
+        document.getElementById("overviewHealthPoolsValue").textContent = formatNumber(
+          suburbInfo.Num_Swimming_Pools_Within_5kms
+        );
+      });
+    }
+
+    function loadChartData(suburb) {
+      if (Object.keys(categoryPolicies) == 0) {
+        loadCategoryPolicies().then((data) => {
+          categoryPolicies = data;
+          createChartPolicies(categoryPolicies);
+        });
+      }
+
+      showSuburbInformation(suburb);
+
+      getLiveabilityCategories(suburb).then((categories) => {
+        getLiveabilityIndexValues(suburb).then((indexValues) => {
+          createChartMetrics(indexValues);
+        });
+        updateChart(categories);
+      });
+    }
+
+    // Initialize suburbs autocomplete
+    const suburbInputEl = document.getElementById("suburbInput");
+    const suburbListEl = document.getElementById("suburbList");
+    const currentSuburbTextEl = document.getElementById("currentSuburbText");
+
+    suburbInputEl.addEventListener("input", changeSuburbAutoComplete);
+    suburbInputEl.addEventListener("focus", changeSuburbAutoComplete);
+    suburbListEl.addEventListener("click", selectSuburbItem);
+
+    function clearSuburbAutocomplete(event) {
+      suburbListEl.innerHTML = "";
+    }
+
+    function changeSuburbAutoComplete({ target }) {
+      let data = target.value;
+      suburbListEl.innerHTML = ``;
+      let autoCompleteValues = suburbAutoComplete(data);
+      autoCompleteValues.forEach((suburb) => {
+        addSuburbItem(suburb);
+      });
+    }
+
+    function suburbAutoComplete(inputValue) {
+      if (!inputValue) {
+        return suburbs;
+      }
+
+      return suburbs.filter((suburb) =>
+        suburb.Suburb.toLowerCase().includes(inputValue.toLowerCase())
+      );
+    }
+
+    function addSuburbItem(suburb) {
+      suburbListEl.innerHTML =
+        suburbListEl.innerHTML +
+        `<li>
+          <div class="suburb-option">
+            <div class="suburb-option-suburb">
+              ${suburb.Suburb}
+            </div>
+            <div class="suburb-option-district">
+              ${suburb.District}
+            </div>
+          </div>
+        </li>`;
+    }
+
+    function selectSuburbItem({ target }) {
+      console.log(target);
+      let element = null;
+
+      if (target.className == "suburb-option") {
+        element = target.children[0];
+      } else if (target.className == "suburb-option-suburb") {
+        element = target;
+      } else if (target.className == "suburb-option-district") {
+        element = target.previousElementSibling;
+      } else {
+        return;
+      }
+
+      if (element) {
+        const suburb = element.textContent.trim();
+        suburbInputEl.value = suburb;
+        suburbListEl.innerHTML = ``;
+        currentSuburbTextEl.textContent = suburb;
+        // resetChart();
+        loadChartData(suburb);
+      }
+    }
+
+    function toggleMetricsTable(category) {
+      document.getElementById(`${category}PoliciesButton`).classList.remove("active");
+      document.getElementById(`${category}MetricsButton`).classList.toggle("active");
+      document.getElementById(`${category}PoliciesTable`).classList.add("hidden");
+      document.getElementById(`${category}MetricsTable`).classList.toggle("hidden");
+    }
+
+    function togglePoliciesTable(category) {
+      document.getElementById(`${category}MetricsButton`).classList.remove("active");
+      document.getElementById(`${category}PoliciesButton`).classList.toggle("active");
+      document.getElementById(`${category}MetricsTable`).classList.add("hidden");
+      document.getElementById(`${category}PoliciesTable`).classList.toggle("hidden");
+    }
+
+    // Load initial chart data
+    suburbInputEl.value = DEFAULT_SUBURB;
+    currentSuburbTextEl.textContent = DEFAULT_SUBURB;
+    loadChartData(DEFAULT_SUBURB);
+  </script>
+</html>

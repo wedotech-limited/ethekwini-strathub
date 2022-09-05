@@ -2,7 +2,7 @@ function formatNumber(value) {
   if (!value && value != 0) {
     return "N/A";
   }
-  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return value.toLocaleString("en-US");
 }
 
 function formatAmount(amount) {

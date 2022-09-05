@@ -9,12 +9,13 @@
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet" />
-    <link rel="stylesheet" href="base_1.css" />
-    <link rel="stylesheet" href="liveability_1.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="liveability.css" />
 
     <script>
       document.documentElement.className += window.self == window.top ? " top" : " framed";
     </script>
+    <script type="text/javascript" src="/formatting.js"></script>
   </head>
   <body>
     <div class="container">
@@ -31,7 +32,7 @@
         <div class="col-12">
           <div class="title">Overview</div>
           <div class="row">
-            <div class="col-12-sm col-12-md col-8-xl col-6-xxl">
+            <div class="col-12-sm col-12-md col-6-xl col-6-xxl">
               <div class="overview-chart">
                 <div class="overview-chart-bg"></div>
                 <div class="overview-chart-circle-outer"></div>
@@ -79,15 +80,15 @@
                 </div>
               </div>
             </div>
-            <div class="col-12-sm col-12-md col-4-xl col-6-xxl">
+            <div class="col-12-sm col-12-md col-6-xl col-6-xxl">
               <div class="overview-table">
                 <div class="row">
                   <div class="col-12">
                     <div class="overview-table-title">Information</div>
                   </div>
                   <div class="row">
-                    <div class="col-6">
-                      <div class="row">
+                    <div class="col-4">
+                      <div class="overview-metric-section">
                         <div class="overview-metric-heading">Housing</div>
                         <div class="overview-metric-container">
                           <div id="overviewHousingMarketValue" class="overview-metric-value"></div>
@@ -109,44 +110,7 @@
                         </div>
                       </div>
 
-                      <div class="row">
-                        <div class="overview-metric-heading">Neighbourhood</div>
-                        <div class="overview-metric-container">
-                          <div
-                            id="overviewNeighbourhoodHallsValue"
-                            class="overview-metric-value"></div>
-                          <div class="overview-metric-label">Community Halls Within 5kms</div>
-                        </div>
-                        <div class="overview-metric-container">
-                          <div
-                            id="overviewNeighbourhoodLibrariesValue"
-                            class="overview-metric-value"></div>
-                          <div class="overview-metric-label">Libraries Within 5kms</div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="overview-metric-heading">Transportation</div>
-                        <div class="overview-metric-container">
-                          <div
-                            id="overviewTransportationBusValue"
-                            class="overview-metric-value"></div>
-                          <div class="overview-metric-label">Bus & Taxi Ranks Within 5kms</div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="overview-metric-heading">Environment</div>
-                        <div class="overview-metric-container">
-                          <div
-                            id="overviewEnvironmentGeohazardsValue"
-                            class="overview-metric-value"></div>
-                          <div class="overview-metric-label">Geohazards</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="row">
+                      <div class="overview-metric-section">
                         <div class="overview-metric-heading">Health</div>
                         <div class="overview-metric-container">
                           <div id="overviewHealthAreasValue" class="overview-metric-value"></div>
@@ -179,6 +143,172 @@
                           <div class="overview-metric-label">Swimming Pools Within 5kms</div>
                         </div>
                       </div>
+
+                      <div class="overview-metric-section">
+                        <div class="overview-metric-heading">Transportation</div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewTransportationBusValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Bus & Taxi Ranks Within 5kms</div>
+                        </div>
+                      </div>
+
+                      <div class="overview-metric-section">
+                        <div class="overview-metric-heading">Education</div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewEducationInstitutionsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">
+                            Educational Institutions Within 5kms
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="overview-metric-section">
+                        <div class="overview-metric-heading">Neighbourhood</div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewNeighbourhoodHallsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Community Halls Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewNeighbourhoodLibrariesValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Libraries Within 5kms</div>
+                        </div>
+                      </div>
+
+                      <div class="overview-metric-section">
+                        <div class="overview-metric-heading">Environment</div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewEnvironmentGeohazardsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Geohazards</div>
+                        </div>
+                      </div>
+                      <div class="overview-metric-section">
+                        <div class="overview-metric-heading">Opportunity</div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewOpportunityGiniValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Avg. Gini Coefficient</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewOpportunityIncomeValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Avg. Median Income</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewOpportunityBillboardsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Billboards Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewOpportunityBillboardsRateValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Billboards Per 10,000 People</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewOpportunityEmployeesValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Full Time Employees</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewOpportunityFirmsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Firms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewOpportunityFirmsOpenedValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Net Firms Opened</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-4">
+                      <div class="overview-metric-section">
+                        <div class="overview-metric-heading">Engagement</div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewEngagementSitesValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Cultural Sites Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewEngagementStadiaValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Existing Stadia Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewEngagementWorshipValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Places Of Worship Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewEngagementShoppingValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Shopping Centres Within 5km</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewEngagementShoppingRateValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">
+                            Shopping Centre Rate Per 10,000 People
+                          </div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewEngagementVotingRateValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">
+                            Voting Station Rate Per 10,000 People
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="overview-metric-section">
+                        <div class="overview-metric-heading">Safety</div>
+                        <div class="overview-metric-container">
+                          <div id="overviewSafetyCrimeValue" class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Crime Rate Per 10,000 People</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div id="overviewSafetyDMPSValue" class="overview-metric-value"></div>
+                          <div class="overview-metric-label">DMPS Stations Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div id="overviewSafetyFireValue" class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Fire Stations Within 5kms</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewSafetyRoadCrashValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Road Crash Rate Per 10,000 People</div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div id="overviewSafetySAPSValue" class="overview-metric-value"></div>
+                          <div class="overview-metric-label">SAPS Stations Within 5kms</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -188,7 +318,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row category-scores-section">
         <div class="col-12">
           <div class="title">Category Scores</div>
           <div class="description">
@@ -708,17 +838,6 @@
     let categories = {};
     let categoryPolicies = {};
 
-    function formatNumber(value) {
-      if (!value) {
-        return "0";
-      }
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    function formatAmount(amount) {
-      return `R ${formatNumber(amount)}`;
-    }
-
     function loadSuburbs() {
       return new Promise((resolve, reject) => {
         const url =
@@ -849,12 +968,36 @@
       // console.log(categories);
 
       Object.entries(CATEGORY_MAP).forEach(([key, value]) => {
-        document.getElementById(`${value}Bar`).style.width = categories[key].index_value + "%";
-        document.getElementById(`${value}Value`).textContent = categories[key].index_value;
+        document
+          .getElementById(`${value}Bar`)
+          .classList.remove(
+            "yellow",
+            "green",
+            "green--light",
+            "blue",
+            "blue--dark",
+            "red",
+            "red--dark"
+          );
+        const indexValue = categories[key].index_value;
+        let colorClass = "yellow";
+        if (indexValue > 20 && indexValue <= 40) {
+          colorClass = "green--light";
+        } else if (indexValue > 40 && indexValue <= 60) {
+          colorClass = "green";
+        } else if (indexValue > 60 && indexValue <= 80) {
+          colorClass = "blue";
+        } else if (indexValue > 80) {
+          colorClass = "blue--dark";
+        }
+
+        document.getElementById(`${value}Bar`).style.width = indexValue + "%";
+        document.getElementById(`${value}Value`).textContent = indexValue;
         document.getElementById(`${value}MedianBar`).style.width =
           categories[key].median_index_value + "%";
         document.getElementById(`${value}MedianValue`).textContent =
           categories[key].median_index_value;
+        document.getElementById(`${value}Bar`).classList.add(colorClass);
       });
     }
 
@@ -1014,6 +1157,10 @@
           return;
         }
 
+        document.querySelectorAll(".overview-metric-value").forEach((el) => {
+          el.classList.remove("show");
+        });
+
         document.getElementById("overviewChartPopulation").textContent = formatNumber(
           suburbInfo.Total_Population
         );
@@ -1067,6 +1214,72 @@
         document.getElementById("overviewHealthPoolsValue").textContent = formatNumber(
           suburbInfo.Num_Swimming_Pools_Within_5kms
         );
+
+        document.getElementById("overviewEngagementSitesValue").textContent = formatNumber(
+          suburbInfo.Num_Cultural_Historical_Sites_W
+        );
+        document.getElementById("overviewEngagementStadiaValue").textContent = formatNumber(
+          suburbInfo.Num_Existing_Stadia_Within_5kms
+        );
+        document.getElementById("overviewEngagementWorshipValue").textContent = formatNumber(
+          suburbInfo.Num_Places_Of_Worship_Within_5k
+        );
+        document.getElementById("overviewEngagementShoppingValue").textContent = formatNumber(
+          suburbInfo.Num_Shopping_Centres_Within_5km
+        );
+        document.getElementById("overviewEngagementShoppingRateValue").textContent = formatNumber(
+          suburbInfo.Shopping_Centre_Rate_Per_10000_
+        );
+        document.getElementById("overviewEngagementVotingRateValue").textContent = formatNumber(
+          suburbInfo.Voting_Stations_Per_10000_Peopl
+        );
+
+        document.getElementById("overviewOpportunityGiniValue").textContent = formatNumber(
+          suburbInfo.Avg_Gini_Coeff
+        );
+        document.getElementById("overviewOpportunityIncomeValue").textContent = formatNumber(
+          suburbInfo.Avg_Median_Income
+        );
+        document.getElementById("overviewOpportunityBillboardsValue").textContent = formatNumber(
+          suburbInfo.Num_Billboards_Within_5kms
+        );
+        document.getElementById("overviewOpportunityBillboardsRateValue").textContent =
+          formatNumber(suburbInfo.Billboard_Rate_Per_10000_People);
+        document.getElementById("overviewOpportunityEmployeesValue").textContent = formatNumber(
+          suburbInfo.Num_Full_Time_Employees
+        );
+        document.getElementById("overviewOpportunityFirmsValue").textContent = formatNumber(
+          suburbInfo.Num_Firms
+        );
+        document.getElementById("overviewOpportunityFirmsOpenedValue").textContent = formatNumber(
+          suburbInfo.Nett_Firms_Opened
+        );
+
+        document.getElementById("overviewEducationInstitutionsValue").textContent = formatNumber(
+          suburbInfo.Num_Educational_Institutions_Wi
+        );
+
+        document.getElementById("overviewSafetyCrimeValue").textContent = formatNumber(
+          suburbInfo.Crime_Rate_Per_10000_People
+        );
+        document.getElementById("overviewSafetyDMPSValue").textContent = formatNumber(
+          suburbInfo.Num_DMPS_Stations_Within_5kms
+        );
+        document.getElementById("overviewSafetyFireValue").textContent = formatNumber(
+          suburbInfo.Num_Fire_Stations_Within_5kms
+        );
+        document.getElementById("overviewSafetyRoadCrashValue").textContent = formatNumber(
+          suburbInfo.Road_Crash_Rate_Per_10000_Peopl
+        );
+        document.getElementById("overviewSafetySAPSValue").textContent = formatNumber(
+          suburbInfo.Num_SAPS_Stations_Within_5kms
+        );
+
+        window.setTimeout(() => {
+          document.querySelectorAll(".overview-metric-value").forEach((el) => {
+            el.classList.add("show");
+          });
+        }, 100);
       });
     }
 

@@ -2,75 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
     <title>WeDoTech - eThekwini Ward Profile</title>
 
-    <link
-      rel="stylesheet"
-      href="https://js.arcgis.com/4.24/esri/themes/light/main.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css" />
     <script src="https://js.arcgis.com/4.24/"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="loading_indicator.css" />
+    <script type="text/javascript" src="/formatting.js"></script>
 
     <style>
-      * {
-        box-sizing: border-box;
-      }
-
       html,
       body {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-        font-family: "IBM Plex Sans", sans-serif;
         background-color: transparent;
-      }
-
-      iframe {
-        user-select: none;
-      }
-
-      /* Loading indicator */
-      .lds-ring {
-        display: inline-block;
-        position: relative;
-        width: 160px;
-        height: 160px;
-      }
-      .lds-ring div {
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        width: 128px;
-        height: 128px;
-        margin: 16px;
-        border: 16px solid rgba(0, 0, 0, 0.2);
-        border-radius: 50%;
-        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: rgba(0, 0, 0, 0.2) transparent transparent transparent;
-      }
-      .lds-ring div:nth-child(1) {
-        animation-delay: -0.45s;
-      }
-      .lds-ring div:nth-child(2) {
-        animation-delay: -0.3s;
-      }
-      .lds-ring div:nth-child(3) {
-        animation-delay: -0.15s;
-      }
-      @keyframes lds-ring {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
       }
 
       .loading-indicator {
@@ -101,10 +50,6 @@
       }
 
       /* local styles */
-      .hidden {
-        display: none !important;
-      }
-
       .card {
         display: flex;
         flex-direction: column;
@@ -117,10 +62,7 @@
       }
 
       .row {
-        display: flex;
-        flex-direction: row;
-        height: 100%;
-        width: 100%;
+        flex-wrap: nowrap;
       }
 
       .col {
@@ -547,8 +489,7 @@
                 });
 
                 const result = results[0];
-                const newObjectId =
-                  result && result.graphic.attributes["OBJECTID"];
+                const newObjectId = result && result.graphic.attributes["OBJECTID"];
 
                 if (!newObjectId) {
                   return;
@@ -573,14 +514,6 @@
           });
         });
       });
-
-      function formatNumberValue(value) {
-        if (!value && value != 0) {
-          return "N/A";
-        }
-
-        return value;
-      }
 
       function loadCouncillorDetails(id, event) {
         const url =
@@ -608,26 +541,26 @@
                 surname = "";
               }
 
-              const valueElements = document.getElementsByClassName(
-                "ward-councillor-value"
-              );
+              const valueElements = document.getElementsByClassName("ward-councillor-value");
 
               for (let i = 0; i < valueElements.length; i++) {
                 valueElements[i].textContent = firstName + " " + surname;
               }
 
-              document.getElementById("wardNumberValue").textContent =
-                attributes.WardNo;
-              document.getElementById("wardCouncillorImg").src =
-                attributes.ImageLink;
-              document.getElementById("wardAfricanValue").textContent =
-                formatNumberValue(attributes.Black_African);
-              document.getElementById("wardIndianValue").textContent =
-                formatNumberValue(attributes.Indian_or_Asian);
-              document.getElementById("wardColouredValue").textContent =
-                formatNumberValue(attributes.Coloured);
-              document.getElementById("wardWhiteValue").textContent =
-                formatNumberValue(attributes.White);
+              document.getElementById("wardNumberValue").textContent = attributes.WardNo;
+              document.getElementById("wardCouncillorImg").src = attributes.ImageLink;
+              document.getElementById("wardAfricanValue").textContent = formatNumber(
+                attributes.Black_African
+              );
+              document.getElementById("wardIndianValue").textContent = formatNumber(
+                attributes.Indian_or_Asian
+              );
+              document.getElementById("wardColouredValue").textContent = formatNumber(
+                attributes.Coloured
+              );
+              document.getElementById("wardWhiteValue").textContent = formatNumber(
+                attributes.White
+              );
 
               if (attributes.WardNo == randomWardNo) {
                 randomWardLoaded = true;
@@ -655,9 +588,7 @@
       }
 
       function showWardSelectionPopup() {
-        document
-          .getElementById("wardSelectionPopup")
-          .classList.remove("hidden");
+        document.getElementById("wardSelectionPopup").classList.remove("hidden");
       }
 
       document.addEventListener("DOMContentLoaded", function () {
@@ -700,17 +631,13 @@
                     id="wardNumberValue"
                     class="ward-number-value"
                     onclick="showWardSelectionPopup()"></span>
-                  <div
-                    id="wardSelectionPopup"
-                    class="ward-selection-popup hidden"></div>
+                  <div id="wardSelectionPopup" class="ward-selection-popup hidden"></div>
                 </div>
               </div>
               <div class="row ward-councillor-row-lg">
                 <div class="ward-councillor-container">
                   <div class="ward-councillor-title">Councillor</div>
-                  <div
-                    id="wardCouncillorValue"
-                    class="ward-councillor-value"></div>
+                  <div id="wardCouncillorValue" class="ward-councillor-value"></div>
                 </div>
               </div>
             </div>
@@ -725,31 +652,23 @@
             <div class="col section">
               <div class="ward-section-header">Population</div>
               <div class="ward-section-info">
-                This ward has <span id="wardPopulation"></span>% of the total
-                city population, of which
+                This ward has <span id="wardPopulation"></span>% of the total city population, of
+                which
               </div>
               <div class="ward-population-container">
-                <div id="wardAfricanValue" class="ward-population-value">
-                  15936
-                </div>
+                <div id="wardAfricanValue" class="ward-population-value">15936</div>
                 <div class="ward-population-title">are African</div>
               </div>
               <div class="ward-population-container">
-                <div id="wardIndianValue" class="ward-population-value">
-                  9898
-                </div>
+                <div id="wardIndianValue" class="ward-population-value">9898</div>
                 <div class="ward-population-title">are Indian / Asian</div>
               </div>
               <div class="ward-population-container">
-                <div id="wardWhiteValue" class="ward-population-value">
-                  7891
-                </div>
+                <div id="wardWhiteValue" class="ward-population-value">7891</div>
                 <div class="ward-population-title">are White</div>
               </div>
               <div class="ward-population-container">
-                <div id="wardColouredValue" class="ward-population-value">
-                  936
-                </div>
+                <div id="wardColouredValue" class="ward-population-value">936</div>
                 <div class="ward-population-title">are Coloured</div>
               </div>
             </div>
@@ -758,14 +677,11 @@
                 <div class="col">
                   <div class="ward-section-header">Budgets</div>
                   <div class="ward-section-info">
-                    This ward is allocated <span id="wardBudgetsValue"></span>%
-                    of the total budgets
+                    This ward is allocated <span id="wardBudgetsValue"></span>% of the total budgets
                   </div>
                   <div class="ward-budget-title-container">
                     <span class="ward-budget-title">Value of R</span
-                    ><span
-                      id="wardBudgetValue"
-                      class="ward-budget-value"></span>
+                    ><span id="wardBudgetValue" class="ward-budget-value"></span>
                   </div>
                 </div>
               </div>
@@ -773,14 +689,12 @@
                 <div class="col">
                   <div class="ward-section-header">Projects ></div>
                   <div class="ward-section-info">
-                    This ward is allocated <span id="wardProjectsValue"></span>%
-                    of the total budgets
+                    This ward is allocated <span id="wardProjectsValue"></span>% of the total
+                    budgets
                   </div>
                   <div class="ward-project-title-container">
                     <span class="ward-project-title">Value of R</span
-                    ><span
-                      id="wardProjectValue"
-                      class="ward-project-value"></span>
+                    ><span id="wardProjectValue" class="ward-project-value"></span>
                   </div>
                 </div>
               </div>

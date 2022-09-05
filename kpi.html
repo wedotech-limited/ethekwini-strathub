@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <title>WeDoTech - eThekwini KPI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="kpi.css" />
+
+    <script>
+      document.documentElement.className += window.self == window.top ? " top" : " framed";
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row main-row">
+        <div class="col-12 col-6-lg">
+          <div class="indicator indicator-large">
+            <div id="kpi1Value" class="number"></div>
+            <div id="kpi1Text" class="tagline"></div>
+          </div>
+        </div>
+        <div class="col-12 col-6-lg">
+          <div class="row">
+            <div class="col-12 col-6-lg">
+              <div class="indicator">
+                <div id="kpi2Value" class="number"></div>
+                <div id="kpi2Text" class="tagline"></div>
+              </div>
+            </div>
+            <div class="col-12 col-6-lg">
+              <div class="indicator">
+                <div id="kpi3Value" class="number"></div>
+                <div id="kpi3Text" class="tagline"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-6-lg">
+              <div class="indicator">
+                <div id="kpi4Value" class="number"></div>
+                <div id="kpi4Text" class="tagline"></div>
+              </div>
+            </div>
+            <div class="col-12 col-6-lg">
+              <div class="indicator">
+                <div id="kpi5Value" class="number"></div>
+                <div id="kpi5Text" class="tagline"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function loadKPI() {
+        return new Promise((resolve, reject) => {
+          const url =
+            "https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/StratHub_eThekwini_Top_5_KPIs/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson";
+          fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+              resolve(data.features);
+            })
+            .catch((error) => {
+              reject(error);
+            });
+        });
+      }
+
+      loadKPI().then((data) => {
+        data.forEach((feature) => {
+          const id = feature.properties.KPI_Number;
+          const text = feature.properties.KPI;
+          const value = feature.properties.Display_Value;
+
+          document.getElementById(`kpi${id}Value`).textContent = value;
+          document.getElementById(`kpi${id}Text`).textContent = text;
+        });
+      });
+    </script>
+  </body>
+</html>

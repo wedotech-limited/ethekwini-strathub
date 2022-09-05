@@ -1,0 +1,110 @@
+.framed .container {
+  height: 100%;
+}
+
+.framed .main-row {
+  height: 100%;
+}
+
+.title {
+  color: rgb(19, 115, 218);
+  font-size: 36px;
+  padding-left: 30px;
+}
+
+.indicator .number {
+  color: rgb(254, 205, 0);
+  font-size: 100px;
+  text-align: center;
+}
+
+.indicator .tagline {
+  color: rgb(112, 112, 112);
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.indicator .source {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.indicator-large {
+  line-height: 1.1;
+}
+
+.indicator-large .number {
+  font-size: 120px;
+  color: rgb(19, 115, 218);
+}
+
+.indicator-large .tagline {
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+@media (min-width: 1200px) {
+  .title {
+    font-size: 60px;
+    /* padding-left: 100px; */
+  }
+  .indicator {
+    margin: 20px;
+  }
+
+  .indicator .number {
+    font-size: 100px;
+  }
+
+  .indicator .tagline {
+    font-size: 28px;
+    line-height: 1.1;
+  }
+
+  .indicator .source {
+    text-align: left;
+    margin: 10px 0;
+  }
+
+  .indicator-large {
+    line-height: 1.1;
+  }
+
+  .indicator-large .number {
+    font-size: 200px;
+  }
+
+  .indicator-large .tagline {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .title {
+    font-size: 60px;
+    /* padding-left: 100px; */
+  }
+
+  .indicator .number {
+    font-size: 140px;
+    text-align: left;
+  }
+
+  .indicator .tagline {
+    font-size: 28px;
+    text-align: left;
+  }
+
+  .indicator-large {
+    line-height: 1.1;
+  }
+
+  .indicator-large .number {
+    font-size: 300px;
+  }
+
+  .indicator-large .tagline {
+    font-size: 40px;
+  }
+}

@@ -274,6 +274,10 @@
       .ward-selection-item:hover {
         background-color: rgb(254, 205, 0);
       }
+
+      .ward-budget-value {
+        font-weight: 600;
+      }
     </style>
 
     <script>
@@ -535,7 +539,7 @@
         const url =
           "https://services3.arcgis.com/HO0zfySJshlD6Twu/arcgis/rest/services/KnowYourCouncillor/FeatureServer/0/query?f=json&objectIds=" +
           id +
-          "&outFields=Black_African%2CColoured%2CFirst_Name%2CImageLink%2CIndian_or_Asian%2CSurname%2CWardNo%2CWhite%2COBJECTID&outSR=102100&returnGeometry=false&spatialRel=esriSpatialRelIntersects";
+          "&outFields=Black_African%2CColoured%2CFirst_Name%2CImageLink%2CIndian_or_Asian%2CSurname%2CWardNo%2CWhite%2CProjects_Count%2CBudget_Amount%2CProjects_Count%2CPop_Percentage%2CBudget_Percentage%2COBJECTID&outSR=102100&returnGeometry=false&spatialRel=esriSpatialRelIntersects";
         const loadingIndicatorEl = document.getElementById("loadingIndicator");
         const wardDetailsEl = document.getElementById("wardDetails");
 
@@ -576,6 +580,18 @@
               );
               document.getElementById("wardWhiteValue").textContent = formatNumber(
                 attributes.White
+              );
+              document.getElementById("wardPopulation").textContent = formatNumber(
+                attributes.Pop_Percentage
+              );
+              document.getElementById("wardBudgetPercValue").textContent = formatNumber(
+                attributes.Budget_Percentage
+              );
+              document.getElementById("wardBudgetValue").textContent = formatAmount(
+                attributes.Budget_Amount
+              );
+              document.getElementById("wardProjectsValue").textContent = formatNumber(
+                attributes.Projects_Count
               );
 
               if (attributes.WardNo == randomWardNo) {
@@ -693,10 +709,11 @@
                 <div class="col">
                   <div class="ward-section-header">Budgets</div>
                   <div class="ward-section-info">
-                    This ward is allocated <span id="wardBudgetsValue"></span>% of the total budgets
+                    This ward is allocated <span id="wardBudgetPercValue"></span>% of the total
+                    budgets
                   </div>
                   <div class="ward-budget-title-container">
-                    <span class="ward-budget-title">Value of R</span
+                    <span class="ward-budget-title">Value of </span
                     ><span id="wardBudgetValue" class="ward-budget-value"></span>
                   </div>
                 </div>
@@ -705,12 +722,7 @@
                 <div class="col">
                   <div class="ward-section-header">Projects ></div>
                   <div class="ward-section-info">
-                    This ward is allocated <span id="wardProjectsValue"></span>% of the total
-                    budgets
-                  </div>
-                  <div class="ward-project-title-container">
-                    <span class="ward-project-title">Value of R</span
-                    ><span id="wardProjectValue" class="ward-project-value"></span>
+                    This ward has <span id="wardProjectsValue"></span> projects
                   </div>
                 </div>
               </div>

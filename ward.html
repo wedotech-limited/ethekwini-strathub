@@ -14,7 +14,6 @@
       rel="stylesheet" />
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="loading_indicator.css" />
-    <script type="text/javascript" src="formatting.js"></script>
 
     <style>
       html,
@@ -397,6 +396,23 @@
       let randomWardInterval = null;
       let randomWardTryCount = 0;
       let showWardNo = () => {};
+
+      function formatNumber(value) {
+        if (!value && value != 0) {
+          return "N/A";
+        }
+        const splits = value.toString().split(".");
+        const part1 = splits[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        let part2 = "";
+        if (splits.length > 1) {
+          part2 = "." + splits[1];
+        }
+        return part1 + part2;
+      }
+
+      function formatAmount(amount) {
+        return `R ${formatNumber(amount)}`;
+      }
 
       require([
         "esri/WebMap",

@@ -15,7 +15,6 @@
     <script>
       document.documentElement.className += window.self == window.top ? " top" : " framed";
     </script>
-    <script type="text/javascript" src="formatting.js"></script>
   </head>
   <body>
     <div class="container">
@@ -112,10 +111,6 @@
 
                       <div class="overview-metric-section">
                         <div class="overview-metric-heading">Health</div>
-                        <div class="overview-metric-container">
-                          <div id="overviewHealthAreasValue" class="overview-metric-value"></div>
-                          <div class="overview-metric-label">Health Areas</div>
-                        </div>
                         <div class="overview-metric-container">
                           <div
                             id="overviewHealthHospitalsValue"
@@ -232,9 +227,9 @@
                         </div>
                         <div class="overview-metric-container">
                           <div
-                            id="overviewOpportunityFirmsOpenedValue"
+                            id="overviewOpportunityFirmsWithinValue"
                             class="overview-metric-value"></div>
-                          <div class="overview-metric-label">Net Firms Opened</div>
+                          <div class="overview-metric-label">Firms within 10kms</div>
                         </div>
                       </div>
                     </div>
@@ -264,7 +259,7 @@
                           <div
                             id="overviewEngagementShoppingValue"
                             class="overview-metric-value"></div>
-                          <div class="overview-metric-label">Shopping Centres Within 5km</div>
+                          <div class="overview-metric-label">Shopping Centres Within 5kms</div>
                         </div>
                         <div class="overview-metric-container">
                           <div
@@ -308,6 +303,20 @@
                           <div id="overviewSafetySAPSValue" class="overview-metric-value"></div>
                           <div class="overview-metric-label">SAPS Stations Within 5kms</div>
                         </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewSafetyCrimeIncidentsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">
+                            Crime Incidents Within Latest Year
+                          </div>
+                        </div>
+                        <div class="overview-metric-container">
+                          <div
+                            id="overviewSafetyRoadIncidentsValue"
+                            class="overview-metric-value"></div>
+                          <div class="overview-metric-label">Road Crash Within Latest Year</div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -332,7 +341,7 @@
                 <div class="chart-scale">
                   <div class="chart-scale-0">0</div>
                   <div class="chart-scale-50">
-                    <div class="chart-scale-avg-text">National Average</div>
+                    <div class="chart-scale-avg-text">Median For Metro</div>
                     <div>50</div>
                   </div>
                   <div class="chart-scale-100">100</div>
@@ -838,6 +847,23 @@
     let categories = {};
     let categoryPolicies = {};
 
+    function formatNumber(value) {
+      if (!value && value != 0) {
+        return "N/A";
+      }
+      const splits = value.toString().split(".");
+      const part1 = splits[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      let part2 = "";
+      if (splits.length > 1) {
+        part2 = "." + splits[1];
+      }
+      return part1 + part2;
+    }
+
+    function formatAmount(amount) {
+      return `R ${formatNumber(amount)}`;
+    }
+
     function loadSuburbs() {
       return new Promise((resolve, reject) => {
         const url =
@@ -1199,9 +1225,6 @@
         document.getElementById("overviewHealthHospitalsValue").textContent = formatNumber(
           suburbInfo.Num_Hospitals_Within_5kms
         );
-        document.getElementById("overviewHealthAreasValue").textContent = formatNumber(
-          suburbInfo.Num_Health_Areas
-        );
         document.getElementById("overviewHealthFixedClinicsValue").textContent = formatNumber(
           suburbInfo.Num_Fixed_Clinics_Within_5kms
         );
@@ -1251,8 +1274,8 @@
         document.getElementById("overviewOpportunityFirmsValue").textContent = formatNumber(
           suburbInfo.Num_Firms
         );
-        document.getElementById("overviewOpportunityFirmsOpenedValue").textContent = formatNumber(
-          suburbInfo.Nett_Firms_Opened
+        document.getElementById("overviewOpportunityFirmsWithinValue").textContent = formatNumber(
+          suburbInfo.Num_Firms_Within_10km
         );
 
         document.getElementById("overviewEducationInstitutionsValue").textContent = formatNumber(
@@ -1273,6 +1296,12 @@
         );
         document.getElementById("overviewSafetySAPSValue").textContent = formatNumber(
           suburbInfo.Num_SAPS_Stations_Within_5kms
+        );
+        document.getElementById("overviewSafetyCrimeIncidentsValue").textContent = formatNumber(
+          suburbInfo.Num_Crime_Incidents_Latest_Yr
+        );
+        document.getElementById("overviewSafetyRoadIncidentsValue").textContent = formatNumber(
+          suburbInfo.Num_Road_Crashes_Latest_Yr
         );
 
         window.setTimeout(() => {

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap");
+
 html,
 body {
   height: 100%;
@@ -52,6 +54,10 @@ html.framed .container {
 
 .align-center {
   align-items: center;
+}
+
+.justify-space-between {
+  justify-content: space-between;
 }
 
 .col-1,
@@ -249,6 +255,54 @@ html.framed .container {
   .container {
     width: 80%;
   }
+
+  .col-1-lg {
+    width: 8.33%;
+  }
+
+  .col-2-lg {
+    width: 16.66%;
+  }
+
+  .col-3-lg {
+    width: 25%;
+  }
+
+  .col-4-lg {
+    width: 33.33%;
+  }
+
+  .col-5-lg {
+    width: 41.66%;
+  }
+
+  .col-6-lg {
+    width: 50%;
+  }
+
+  .col-7-lg {
+    width: 58.33%;
+  }
+
+  .col-8-lg {
+    width: 66.66%;
+  }
+
+  .col-9-lg {
+    width: 75%;
+  }
+
+  .col-10-lg {
+    width: 83.33%;
+  }
+
+  .col-11-lg {
+    width: 91.66%;
+  }
+
+  .col-12-lg {
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width: 1600px) {
@@ -358,4 +412,36 @@ html.framed .container {
   .col-12-xxl {
     width: 100%;
   }
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.mt-7 {
+  margin-top: 1.75rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
 }

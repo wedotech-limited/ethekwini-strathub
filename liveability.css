@@ -668,7 +668,7 @@
 }
 
 .comparison-table .row.metric {
-  padding: 8px 0;
+  padding: 5px 0;
 }
 
 .comparison-table .chart-metric-table {
@@ -688,7 +688,7 @@
 .comparison-table-line {
   border-bottom: 2px solid var(--eth-yellow);
   width: 100%;
-  margin-top: 15px;
+  margin-top: 9px;
 }
 
 .comparison-table-line.--thick {

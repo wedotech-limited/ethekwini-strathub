@@ -688,7 +688,7 @@
 .comparison-table-line {
   border-bottom: 2px solid var(--eth-yellow);
   width: 100%;
-  margin-top: 8px;
+  margin-top: 15px;
 }
 
 .comparison-table-line.--thick {

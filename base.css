@@ -60,6 +60,10 @@ html.framed .container {
   justify-content: space-between;
 }
 
+.text-center {
+  text-align: center !important;
+}
+
 .col-1,
 .col-2,
 .col-3,
@@ -189,10 +193,6 @@ html.framed .container {
   .hidden-sm {
     display: block;
   }
-
-  .hidden-md {
-    display: none;
-  }
 }
 
 @media only screen and (min-width: 992px) {
@@ -251,6 +251,12 @@ html.framed .container {
   }
 }
 
+@media only screen and (max-width: 1199px) {
+  .hidden-md-down {
+    display: none !important;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
   .container {
     width: 80%;
@@ -302,6 +308,10 @@ html.framed .container {
 
   .col-12-lg {
     width: 100%;
+  }
+
+  .hidden-md {
+    display: none !important;
   }
 }
 

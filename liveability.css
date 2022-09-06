@@ -25,7 +25,6 @@
 .suburb-hint {
   font-size: 14px;
   color: rgba(0, 0, 0, 0.3);
-  margin-left: 30px;
   padding-top: 5px;
   position: absolute;
 }
@@ -42,8 +41,15 @@
   font-size: 20px;
   border: 1px solid var(--eth-blue);
   margin: 0;
-  margin-left: 30px;
   padding: 0;
+}
+
+.suburb-input-container .suburb-list {
+  margin-left: 30px;
+}
+
+.suburb-input-container .suburb-hint {
+  margin-left: 30px;
 }
 
 .suburb-list li {
@@ -62,9 +68,18 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.suburb-option-suburb {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .suburb-option-district {
   font-size: 70%;
   color: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .suburb-input {
@@ -158,14 +173,14 @@
   height: 100%;
 }
 
-.chart-option-item {
+.metrics-button {
   display: flex;
   align-items: center;
   cursor: pointer;
   user-select: none;
 }
 
-.chart-option-item::after {
+.metrics-button::after {
   content: "";
   display: block;
   width: 24px;
@@ -178,7 +193,7 @@
   transition: 0.25s;
 }
 
-.chart-option-item.active::after {
+.metrics-button.active::after {
   transform: scaleY(-1);
 }
 
@@ -588,6 +603,7 @@
   font-size: 40px;
   margin-left: 10px;
   color: var(--eth-blue);
+  margin-bottom: 10px;
 }
 
 /* Overview Table */
@@ -636,6 +652,100 @@
   opacity: 70%;
 }
 
+.suburb-comparison-section {
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+
+.comparison-table {
+  margin-top: 20px;
+}
+
+.comparison-table-header {
+  font-weight: 500;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+.comparison-table .row.metric {
+  padding: 8px 0;
+}
+
+.comparison-table .chart-metric-table {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.comparison-table .comparison-table-col {
+  padding: 0 4px;
+}
+
+.comparison-table-value {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.comparison-table-line {
+  border-bottom: 2px solid var(--eth-yellow);
+  width: 100%;
+}
+
+.comparison-table-line.--thick {
+  border-bottom-width: 3px;
+}
+
+.comparison-table-suburb-plus {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 20px;
+  margin-bottom: 20px;
+}
+
+.comparison-table-suburb-text {
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+.icon-suburb-plus {
+  font-size: 40px;
+  color: var(--eth-blue);
+}
+
+.comparison-table-suburb-header {
+  position: relative;
+}
+
+.suburb-comparison-input-container {
+  position: absolute;
+  left: -20px;
+  top: -10px;
+  width: 400px;
+  background-color: #fff;
+  z-index: 30;
+}
+
+.comparison-suburb-input {
+  border: 0;
+  font-size: 24px;
+  width: 400px;
+  outline: 0;
+}
+
+.comparison-table-suburb-header .suburb1-name,
+.comparison-table-suburb-header .suburb2-name {
+  text-decoration: underline;
+  text-align: left;
+}
+
+.suburb-comparison-input-hint {
+  font-size: 11px;
+  opacity: 40%;
+  height: 0;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
 @media (min-width: 768px) {
   .chart-metric-row {
     margin: 10px 0 20px;
@@ -667,6 +777,32 @@
   }
 }
 
+@media (min-width: 1200px) {
+  .comparison-table-value {
+    width: 100%;
+    text-align: center;
+  }
+
+  .comparison-table-line {
+    width: calc(100% - 70px);
+    margin-left: 70px;
+  }
+
+  .comparison-table-suburb-header .suburb1-name,
+  .comparison-table-suburb-header .suburb2-name {
+    text-align: center;
+  }
+
+  .suburb-comparison-input-hint {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .comparison-table-suburb-plus {
+    margin-bottom: 0;
+  }
+}
+
 @media (min-width: 1600px) {
   .overview-table {
     margin-top: 0;
@@ -674,6 +810,6 @@
 
   .overview-table-title {
     line-height: 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 }

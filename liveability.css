@@ -94,7 +94,7 @@
 }
 
 .category-scores-section {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .title {
@@ -284,7 +284,7 @@
 }
 
 .chart-footer {
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .chart-footer-col {
@@ -653,12 +653,12 @@
 }
 
 .suburb-comparison-section {
-  margin-top: 30px;
+  margin-top: 50px;
   padding-bottom: 30px;
 }
 
 .comparison-table {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .comparison-table-header {
@@ -768,10 +768,6 @@
     top: 15px;
   }
 
-  .chart-footer {
-    margin-top: 40px;
-  }
-
   .chart-footer-title {
     margin-top: 0;
   }
@@ -781,6 +777,18 @@
   .comparison-table-value {
     width: 100%;
     text-align: center;
+  }
+
+  .chart-footer {
+    margin-top: 100px;
+  }
+
+  .suburb-comparison-section {
+    margin-top: 100px;
+  }
+
+  .category-scores-section {
+    margin-top: 100px;
   }
 
   .comparison-table-line {

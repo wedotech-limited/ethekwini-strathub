@@ -1824,6 +1824,12 @@
     setCurrentSuburbName(suburb);
     // resetChart();
     loadChartData(suburb);
+
+    Object.values(CATEGORY_MAP).forEach((category) => {
+      if (document.getElementById(`${category}ComparisonMetricsButton`).classList.contains("active")) {
+        showComparisonIndexValues(category);
+      }
+    });
   }
 
   function updateSuburbComparisonInputValue(element, index) {
@@ -2013,7 +2019,11 @@
       const suburb1Values = values[1];
       const suburb2Values = values[2];
 
-      createComparisonChartMetrics(category, currentSuburb, currentSuburbValues, suburb1, suburb1Values, suburb2, suburb2Values);
+      try{
+        createComparisonChartMetrics(category, currentSuburb, currentSuburbValues, suburb1, suburb1Values, suburb2, suburb2Values);
+      } catch(error) {
+        console.error("Failed to create comparison chart metrics", error);
+      }
     });
   }
 
@@ -2050,10 +2060,5 @@
   setCurrentSuburbName(DEFAULT_SUBURB);
   loadChartData(DEFAULT_SUBURB);
 
-  // setTimeout(() => {
-  //   loadComparisonData("AMALANGA", 1);
-  //   loadComparisonData("CHELMSFORDVILLE", 2);
-  // }, 2000);
 </script>
-
 </html>
